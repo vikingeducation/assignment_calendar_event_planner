@@ -1,7 +1,6 @@
 const express = require("express");
 const expressHbs = require("express-handlebars");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
 
 const app = express();
 const hbs = expressHbs.create({
@@ -14,7 +13,6 @@ app.engine("hbs", hbs.engine);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
-app.use(cookieParser());
 
 // logging
 
@@ -50,6 +48,10 @@ app.use((req, res, next) => {
 
   next();
 });
+
+
+const usersIndex = require('./routes/users');
+app.use('/', userIndex);
 
 // server
 
