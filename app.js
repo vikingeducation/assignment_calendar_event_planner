@@ -55,8 +55,12 @@ app.get('/', (req, res) => {
   res.redirect('/users');
 });
 
-const userIndex = require('./routes/users');
-app.use('/users', userIndex);
+// routes
+
+const users = require('./routes/users');
+const calendars = require('./routes/calendars');
+app.use('/users', users);
+app.use('/calendars', calendars);
 
 // server
 
