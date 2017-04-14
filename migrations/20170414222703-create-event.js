@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Events', {
+    return queryInterface.createTable("Events", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -18,24 +18,27 @@ module.exports = {
         type: Sequelize.DATE
       },
       startTime: {
-        type: Sequelize.DATE
+        type: Sequelize.TIME
       },
-      stopTime: {
-        type: Sequelize.DATE
+      endTime: {
+        type: Sequelize.TIME
       },
-      {
+      calendarId: {
+        type: Sequelize.INTEGER
+      },
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW')
+        defaultValue: Sequelize.fn("NOW")
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW')
+        defaultValue: Sequelize.fn("NOW")
       }
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Events');
+    return queryInterface.dropTable("Events");
   }
 };

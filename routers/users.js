@@ -94,7 +94,7 @@ router.put("/users/:id", (req, res) => {
   )
     .then(() => {
       req.method = "GET";
-      console.log("inside calendar edit put block ", `${req.params.id}`);
+      //console.log("inside calendar edit put block ", `${req.params.id}`);
       res.redirect(`/users/${req.params.id}`);
     })
     .catch(e => res.status(500).send(e.stack));

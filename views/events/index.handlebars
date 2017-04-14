@@ -1,0 +1,53 @@
+
+
+<header class="page-header">
+  <h1>events</h1>
+  <a href="/events/new" class="btn btn-primary">+ New event</a>
+</header>
+
+
+{{#if events.length }}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Event Name</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each events as |event| }}
+      <tr>
+        <td>
+          <a href="/events/{{ event.id }}">{{ event.name }}</a>
+        </td>
+        <td>
+          <a href="/events/{{ event.id }}">{{ event.description }}</a>
+        </td>
+        <td>
+          <a href="/calendars/{{ calendar.event.id }}">{{event.date}}</a>
+        </td>
+        <td>
+          <a href="/calendars/{{ calendar.event.id }}">{{event.startTimel}}</a>
+        </td>
+        <td>
+          <a href="/calendars/{{ calendar.event.id }}">{{event.endTimel}}</a>
+        </td>
+        <td>
+          <a href="/events/{{ event.id }}/edit">Edit</a>
+        </td>
+        <td>
+          <a href="/events/{{ event.id }}?_method=delete" class="text-danger">Delete</a>
+        </td>
+      </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+{{else }}
+  <p class="text-danger">No events</p>
+{{/if }}
