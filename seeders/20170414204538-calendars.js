@@ -5,9 +5,9 @@ var models = require('../models');
 module.exports = {
   up: function (queryInterface, Sequelize) {
     var calendars = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 1; i <= 10; i++) {
       calendars.push({
-        id: i,
+        userId: i,
         name: `My Calendar ${ i }`
       });
     }

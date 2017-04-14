@@ -4,7 +4,7 @@
 </header>
 
 
-{{#if users.length }}
+{{#if records.length }}
   <table class="table">
     <thead>
       <tr>
@@ -16,25 +16,22 @@
       </tr>
     </thead>
     <tbody>
-      {{#each calendars as |calendar| }}
+      {{#each records as |record| }}
       <tr>
         <td>
-          <a href="/users/{{ user.id }}">{{ calendar.name }}</a>
+          <a href="/calendars/{{ record.calendar.id }}">{{ record.calendar.name }}</a>
         </td>
         <td>
-          <a href="/users/{{ user.id }}">{{ user.lname }}</a>
+          <a href="/users/{{ record.user.id }}">{{ record.user.username }}</a>
         </td>
         <td>
-          <a href="/users/{{ user.id }}">{{ user.username }}</a>
+          {{ record.user.email }}
         </td>
         <td>
-          <a href="/users/{{ user.id }}">{{ user.email }}</a>
+          <a href="/calendars/{{ record.calendar.id }}/edit">Edit</a>
         </td>
         <td>
-          <a href="/users/{{ user.id }}/edit">Edit</a>
-        </td>
-        <td>
-          <a href="/users/{{ user.id }}?_method=delete" class="text-danger">Delete</a>
+          <a href="/calendars/{{ record.calendar.id }}?_method=delete" class="text-danger">Delete</a>
         </td>
       </tr>
       {{/each }}
