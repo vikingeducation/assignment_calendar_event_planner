@@ -10,20 +10,28 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>User</th>
+        <th>Calendar Name</th>
+        <th>Username</th>
+        <th>Email</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
     </thead>
     <tbody>
       {{#each calendars as |calendar| }}
+
       <tr>
         <td>
           <a href="/calendars/{{ calendar.id }}">{{ calendar.name }}</a>
         </td>
         <td>
-          <a href="/calendars/{{ calendar.id }}">{{ calendar.userId }}</a>
+          <!-- <a href="/calendars/{{ calendar.id }}">{{ calendar.userId }}</a> -->
+          <a href="/users/{{ calendar.userId }}">Username</a>
+
+        </td>
+        <td>
+          <!-- <a href="/calendars/{{ user.email }}">{{ user.email }}</a> -->
+          <a href="/users/{{ calendar.userID }}">Users email goes here</a>
         </td>
         <td>
           <a href="/calendars/{{ calendar.id }}/edit">Edit</a>
