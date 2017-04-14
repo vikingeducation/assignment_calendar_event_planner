@@ -49,9 +49,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// index
+
+app.get('/', (req, res) => {
+  res.redirect('/users');
+});
 
 const userIndex = require('./routes/users');
-app.use('/', userIndex);
+app.use('/users', userIndex);
 
 // server
 
