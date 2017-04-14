@@ -1,13 +1,11 @@
-var express = require('express');
+var express = require("express");
 var app = express();
-
 
 // ----------------------------------------
 // Body Parser
 // ----------------------------------------
-var bodyParser = require('body-parser');
+var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 // ----------------------------------------
 // Method Override
@@ -17,7 +15,7 @@ app.use((req, res, next) => {
   if (req.query._method) {
     method = req.query._method;
     delete req.query._method;
-  } else if (typeof req.body === 'object' && req.body._method) {
+  } else if (typeof req.body === "object" && req.body._method) {
     method = req.body._method;
     delete req.body._method;
   }
@@ -30,74 +28,59 @@ app.use((req, res, next) => {
   next();
 });
 
-
 // ----------------------------------------
 // Public
 // ----------------------------------------
 app.use(express.static(`${__dirname}/public`));
 
-
 // ----------------------------------------
 // Logging
 // ----------------------------------------
-var morgan = require('morgan');
-app.use(morgan('tiny'));
+var morgan = require("morgan");
+app.use(morgan("tiny"));
 app.use((req, res, next) => {
-  ['query', 'params', 'body'].forEach((key) => {
+  ["query", "params", "body"].forEach(key => {
     if (req[key]) {
       var capKey = key[0].toUpperCase() + key.substr(1);
       var value = JSON.stringify(req[key], null, 2);
-      console.log(`${ capKey }: ${ value }`);
+      console.log(`${capKey}: ${value}`);
     }
   });
   next();
 });
 
-
 // ----------------------------------------
 // Routes
 // ----------------------------------------
-var usersRoutes = require('./routers/users');
-app.use('/', usersRoutes);
-
+var usersRoutes = require("./routers/users");
+app.use("/", usersRoutes);
 
 // ----------------------------------------
 // Template Engine
 // ----------------------------------------
-var expressHandlebars = require('express-handlebars');
+var expressHandlebars = require("express-handlebars");
 
 var hbs = expressHandlebars.create({
-  partialsDir: 'views/',
-  defaultLayout: 'application'
+  partialsDir: "views/",
+  defaultLayout: "main"
 });
 
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
 
 // ----------------------------------------
 // Server
 // ----------------------------------------
-var port = process.env.PORT ||
-  process.argv[2] ||
-  3000;
-var host = 'localhost';
+var port = process.env.PORT || process.argv[2] || 3000;
+var host = "localhost";
 
 var args;
-process.env.NODE_ENV === 'production' ?
-  args = [port] :
-  args = [port, host];
+process.env.NODE_ENV === "production" ? (args = [port]) : (args = [port, host]);
 
 args.push(() => {
-  console.log(`Listening: http://${ host }:${ port }`);
+  console.log(`Listening: http://${host}:${port}`);
 });
 
 app.listen.apply(app, args);
 
-
-
-
 module.exports = app;
-
-
-
