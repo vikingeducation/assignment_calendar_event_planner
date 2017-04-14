@@ -16,12 +16,22 @@ router.get("/calendars", (req, res) => {
       cals = calendars;
       let usersProm = [];
       cals.forEach(calendar => {
-        usersProm.push(User.findById(calendar.userID));
+        usersProm.push(User.findById(calendar.userId));
       });
       return Promise.all(usersProm);
     })
-    .then(response => {
-      console.log(response[0]);
+    .then(users => {
+      let calsInfo = [];
+      for (let i = 0; i < cals.length; i++) {
+        calsInfo[i] = {
+          name: cals[i].name,
+          calendarId: cals[i].id,
+          userId: users[i].id,
+          username: users[i].username,
+          email: users[i].email
+        }
+      }
+      res.render('calendars/index', {calsInfo});
     })
     .catch(e => res.status(500).send(e.stack));
 });
