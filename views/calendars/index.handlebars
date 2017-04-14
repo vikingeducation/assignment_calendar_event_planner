@@ -19,19 +19,15 @@
     </thead>
     <tbody>
       {{#each calendars as |calendar| }}
-
       <tr>
         <td>
           <a href="/calendars/{{ calendar.id }}">{{ calendar.name }}</a>
         </td>
         <td>
-          <!-- <a href="/calendars/{{ calendar.id }}">{{ calendar.userId }}</a> -->
-          <a href="/users/{{ calendar.userId }}">Username</a>
-
+          <a href="/calendars/{{ calendar.id }}">{{ calendar.user.username }}</a>
         </td>
         <td>
-          <!-- <a href="/calendars/{{ user.email }}">{{ user.email }}</a> -->
-          <a href="/users/{{ calendar.userID }}">Users email goes here</a>
+          <a href="/users/{{ calendar.user.id }}">{{calendar.user.email}}</a>
         </td>
         <td>
           <a href="/calendars/{{ calendar.id }}/edit">Edit</a>
@@ -40,7 +36,8 @@
           <a href="/calendars/{{ calendar.id }}?_method=delete" class="text-danger">Delete</a>
         </td>
       </tr>
-      {{/each }}
+      {{/each}}
+
     </tbody>
   </table>
 {{else }}

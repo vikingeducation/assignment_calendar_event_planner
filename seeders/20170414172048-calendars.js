@@ -16,7 +16,7 @@ module.exports = {
     var calendars = [];
     for (let i = 1; i < 11; i++) {
       calendars.push({
-        name: `Calendar By User:${i}`,
+        name: `Calendar Number ${i}`,
         userId: i
       });
     }
