@@ -1,17 +1,23 @@
+Initialize and install requirements:
 npm init
-npm install --save sequelize
-npm install --save pg
-npm install --save pg-hstore
-npm install morgan --save
+npm i -S sequelize pg pg-hstore morgan express express-handlebars body-parser
+
+Create sequelize structure:
 sequelize init
-createdb demo_exploring_sequelize_development
-createdb demo_exploring_sequelize_test
 
-**edit config/config.json to point to your postgres database with right credentials**
+Create mongodb database(s):
+createdb my_project_development
+createdb my_project_test
 
-Create migrations with name and fields:
-sequelize model:create --name User --attributes "fname:string lname:string username:string email:string"
-**Add the following to the newly created model:
+Edit config/config.json to use the databases you created:
+Set username to your local username
+Set databases to the databases you created in last step
+Set dialect to 'postgres'
+
+Create migration and model with name and fields:
+sequelize model:create --name NameOfModel --attributes "frstAttr:string scndAttr:integer thrdAttr:datetime"
+
+Change createdAt and updatedAt at for newly created migration to include defaults:
 createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -22,11 +28,11 @@ createdAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
       }
-***
 
-Create seeds:
-sequelize seed:create --name users
-**Add some method of creating data in new seed file in the UP method, like:
+Create seed with name:
+sequelize seed:create --name SeedName
+
+Add some method of creating data in new seed file in the UP method, e.g.:
 var users = [];
  for (let i = 0; i < 10; i++) {
    users.push({
@@ -86,9 +92,7 @@ repl.context.lg = (data) => {
     "c": "node repl.js",
 ***
 
-$ npm install --save express
-$ npm install --save express-handlebars
-$ npm install --save body-parser
+
 
 **require body-parser, morgan, and handlebars in app.js/index.js:
 
