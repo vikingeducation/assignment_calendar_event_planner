@@ -4,6 +4,7 @@ var models = require("../models");
 var User = models.User;
 var Calendar = models.Calendar;
 
+
 router.get("/", (req, res) => {
   Calendar.findAll().then(calendars => {
     User.findAll().then(users => {
