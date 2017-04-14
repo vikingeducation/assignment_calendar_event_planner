@@ -54,8 +54,10 @@ app.use((req, res, next) => {
 // ----------------------------------------
 var usersRoutes = require("./routers/users");
 var calendarsRoutes = require("./routers/calendars");
+var eventsRoutes = require("./routers/events");
 app.use("/", usersRoutes);
 app.use("/", calendarsRoutes);
+app.use("/", eventsRoutes);
 
 // ----------------------------------------
 // Template Engine
