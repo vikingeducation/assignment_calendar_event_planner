@@ -25,7 +25,7 @@ router.put('/:id', (req, res) => {
     limit: 1
   }).then(user => {
     req.method = 'GET';
-    res.redirect(`/users/${user.id}`)
+    res.redirect(`/users/${req.params.id}`)
   }).catch(err => {
     res.status(500).send(err.stack);
   });
@@ -57,13 +57,13 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  let newUser = {
+  let userParams = {
     fname: req.body.user.fname,
     lname: req.body.user.lname,
     email: req.body.user.email,
     username: req.body.user.username
   };
-  User.create(newUser).then(user => {
+  User.create(userParams).then(user => {
     res.redirect(`/users/${user.id}`)
   }).catch(err => {
     res.status(500).send(err.stack);
