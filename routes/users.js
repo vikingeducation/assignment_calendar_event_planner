@@ -29,8 +29,19 @@ router.put('/:id', (req, res) => {
     res.redirect(`/users/${user.id}`)
   }).catch(err => {
     res.status(500).send(err.stack);
-  })
-  
+  });
+});
+
+router.delete('/:id', (req, res) => {
+  User.destroy({
+    where: { id: req.params.id },
+    limit: 1
+  }).then( () => {
+    req.method = 'GET';
+    res.redirect('/users');
+  }).catch(err => {
+    res.status(500).send(err.stack);
+  });
 });
 
 router.get('/:id/edit', (req, res) => {
