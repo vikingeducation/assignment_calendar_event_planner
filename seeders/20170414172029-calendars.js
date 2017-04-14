@@ -14,16 +14,14 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    var users = [];
-    for (let i = 0; i < 10; i++) {
-      users.push({
-        fname: `FirstName${ i }`,
-        lname: `LastName${ i }`,
-        username: `username${ i }`,
-        email: `name${ i }@gmail.com`
+    var calendars = [];
+    for (let userId = 1; userId <= 10; userId++) {
+      calendars.push({
+        name: `Calendar ${ userId }`,
+        userId: userId
       });
     }
-    return queryInterface.bulkInsert('Users', users);
+    return queryInterface.bulkInsert('Calendars', calendars);
   },
 
   down: function (queryInterface, Sequelize) {
@@ -34,6 +32,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('Person', null, {});
     */
-    return queryInterface.bulkDelete('Users', null, {}, models.User);
+    return queryInterface.bulkDelete('Calendars', null, {}, models.Calendar);
   }
 };

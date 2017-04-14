@@ -8,7 +8,7 @@ var sequelize = models.sequelize;
 // Index
 // ----------------------------------------
 var onIndex = (req, res) => {
-  User.findAll({ order: '"createdAt"' })
+  User.findAll({ order: '"fname"' })
     .then(users => {
       res.render("users/index", { users });
     })
@@ -98,5 +98,22 @@ router.put("/users/:id", (req, res) => {
     })
     .catch(e => res.status(500).send(e.stack));
 });
+
+
+// ----------------------------------------
+// Destroy
+// ----------------------------------------
+router.delete('/users/:id', (req, res) => {
+  User.destroy({
+    where: { id: req.params.id },
+    limit: 1
+  })
+    .then(() => {
+      req.method = 'GET';
+      res.redirect('/users');
+    })
+    .catch((e) => res.status(500).send(e.stack));
+});
+
 
 module.exports = router;
