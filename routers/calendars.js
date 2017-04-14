@@ -3,6 +3,7 @@ var router = express.Router();
 var models = require("./../models");
 var User = models.User;
 var Calendar = models.Calendar;
+var Event = models.Event;
 var sequelize = models.sequelize;
 
 // ----------------------------------------
@@ -80,7 +81,6 @@ router.get("/calendars/:id/edit", (req, res) => {
 // ----------------------------------------
 router.post("/calendars", (req, res) => {
   var body = req.body;
-  var name = body.calendar.name;
   var username = body.user.username;
   var calParams = {
     name: body.calendar.name
@@ -88,7 +88,6 @@ router.post("/calendars", (req, res) => {
   User.find({
     where: { username }
   }).then(user => {
-    console.log("user query", user.username);
     calParams.userId = user.id;
     Calendar.create(calParams)
       .then(calendar => {
@@ -106,7 +105,7 @@ router.put("/calendars/:id", (req, res) => {
 
   Calendar.update(
     {
-      name: newName,
+      name: newName
     },
     {
       where: { id: req.params.id },
@@ -123,19 +122,20 @@ router.put("/calendars/:id", (req, res) => {
 // ----------------------------------------
 // Destroy
 // ----------------------------------------
-router.delete('/calendars/:id', (req, res) => {
-  Calendar.destroy({
+router.delete("/calendars/:id", (req, res) => {
+  let promiseE = Event.destroy({
+    where: { calendarId: req.params.id }
+  });
+  let promiseC = Calendar.destroy({
     where: { id: req.params.id },
     limit: 1
-  })
+  });
+  Promise.all([promiseE, promiseC])
     .then(() => {
-      req.method = 'GET';
-      res.redirect('/calendars');
+      req.method = "GET";
+      res.redirect("/calendars");
     })
-    .catch((e) => res.status(500).send(e.stack));
+    .catch(e => res.status(500).send(e.stack));
 });
-
-
-
 
 module.exports = router;
