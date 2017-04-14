@@ -12,28 +12,64 @@ var sequelize = models.sequelize;
 
 router.get("/events", (req, res) => {
   //Event Name>Date<Start Time<End Time</Calendar Name</Username</Email</UserId<CalendarId
-  let cals;
-  Calendar.findAll({ order: '"name"' })
-    .then(calendars => {
-      cals = calendars;
-      let usersProm = [];
-      cals.forEach(calendar => {
-        usersProm.push(User.findById(calendar.userId));
+  let eventsArr;
+  Event.findAll({ order: '"name"' })
+    .then(events => {
+      eventsArr = events;
+      let calendarsProm = [];
+      eventsArr.forEach(event => {
+        calendarsProm.push(Calendar.findById(event.calendarId));
       });
-      return Promise.all(usersProm);
+      return Promise.all(calendarsProm);
+    })
+    .then(calendars => {
+      for (let i = 0; i < calendars.length; i++) {
+        eventsArr[i].calendarId = calendars[i].id;
+        eventsArr[i].calendarName = calendars[i].name;
+        eventsArr[i].userId = calendars[i].userId;
+      };
+      let usersProm = [];
+      eventsArr.forEach(event => {
+        usersProm.push(User.findById(event.userId));
+      });
+      return Promise.all(usersProm);      
     })
     .then(users => {
-      let calsInfo = [];
-      for (let i = 0; i < cals.length; i++) {
-        calsInfo[i] = {
-          name: cals[i].name,
-          calendarId: cals[i].id,
-          userId: users[i].id,
-          username: users[i].username,
-          email: users[i].email
-        };
-      }
-      res.render("calendars/index", { calsInfo });
+      for (let i = 0; i < users.length; i++) {
+        eventsArr[i].username = users[i].username;
+        eventsArr[i].email = users[i].email;
+      };
+      res.render("events/index", { eventsArr });
     })
     .catch(e => res.status(500).send(e.stack));
 });
+
+// ----------------------------------------
+// New
+// ----------------------------------------
+router.get("/events/new", (req, res) => {
+  res.render("events/new");
+});
+
+
+// ----------------------------------------
+// Show
+// ----------------------------------------
+router.get("/events/:id", (req, res) => {
+  Event.findById(req.params.id)
+    .then(event => {
+      if (event) {
+        Calendar.findById(event.calendarId).then(calendar => {
+          User.findById(calendar.userId).then(user => {
+            res.render("events/show", { event, calendar, user });
+          })
+        });
+      } else {
+        res.send(404);
+      }
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+
+module.exports = router;
