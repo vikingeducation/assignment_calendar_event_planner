@@ -1,0 +1,22 @@
+
+
+<header class="page-header">
+  <h1>New event</h1>
+</header>
+
+
+<form action="/events" method="post">
+  <h2>event Info</h2>
+  <div class="form-group">
+    <label for="user_fname">Name</label>
+    <input type="text" class="form-control" name="event[name]" id="event_name">
+  </div>
+  <div class="form-group">
+    <label for="event_userId">User</label>
+    <input type="text" class="form-control" name="event[userId]" id="event_userId">
+  </div>
+
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary">
+  </div>
+</form>
