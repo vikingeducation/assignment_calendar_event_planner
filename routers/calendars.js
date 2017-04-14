@@ -11,7 +11,7 @@ var sequelize = models.sequelize;
 
 router.get("/calendars", (req, res) => {
   let cals;
-  Calendar.findAll()
+  Calendar.findAll({ order: '"name"' })
     .then(calendars => {
       cals = calendars;
       let usersProm = [];
@@ -61,19 +61,34 @@ router.get("/calendars/:id", (req, res) => {
 });
 
 // ----------------------------------------
+// Edit
+// ----------------------------------------
+router.get("/calendars/:id/edit", (req, res) => {
+  Calendar.findById(req.params.id)
+    .then(calendar => {
+      if (calendar) {
+        res.render("calendars/edit", { calendar });
+      } else {
+        res.send(404);
+      }
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+// ----------------------------------------
 // Create
 // ----------------------------------------
 router.post("/calendars", (req, res) => {
   var body = req.body;
   var name = body.calendar.name;
   var username = body.user.username;
-
   var calParams = {
     name: body.calendar.name
   };
-  User.findAll({
+  User.find({
     where: { username }
   }).then(user => {
+    console.log("user query", user.username);
     calParams.userId = user.id;
     Calendar.create(calParams)
       .then(calendar => {
@@ -82,5 +97,45 @@ router.post("/calendars", (req, res) => {
       .catch(e => res.status(500).send(e.stack));
   });
 });
+
+// ----------------------------------------
+// Update
+// ----------------------------------------
+router.put("/calendars/:id", (req, res) => {
+  var newName = req.body.calendar.name;
+
+  Calendar.update(
+    {
+      name: newName,
+    },
+    {
+      where: { id: req.params.id },
+      limit: 1
+    }
+  )
+    .then(() => {
+      req.method = "GET";
+      res.redirect(`/calendars/${req.params.id}`);
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+// ----------------------------------------
+// Destroy
+// ----------------------------------------
+router.delete('/calendars/:id', (req, res) => {
+  Calendar.destroy({
+    where: { id: req.params.id },
+    limit: 1
+  })
+    .then(() => {
+      req.method = 'GET';
+      res.redirect('/calendars');
+    })
+    .catch((e) => res.status(500).send(e.stack));
+});
+
+
+
 
 module.exports = router;
