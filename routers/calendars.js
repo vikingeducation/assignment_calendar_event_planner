@@ -29,11 +29,58 @@ router.get("/calendars", (req, res) => {
           userId: users[i].id,
           username: users[i].username,
           email: users[i].email
-        }
+        };
       }
-      res.render('calendars/index', {calsInfo});
+      res.render("calendars/index", { calsInfo });
     })
     .catch(e => res.status(500).send(e.stack));
+});
+
+// ----------------------------------------
+// New
+// ----------------------------------------
+router.get("/calendars/new", (req, res) => {
+  res.render("calendars/new");
+});
+
+// ----------------------------------------
+// Show
+// ----------------------------------------
+router.get("/calendars/:id", (req, res) => {
+  Calendar.findById(req.params.id)
+    .then(calendar => {
+      if (calendar) {
+        User.findById(calendar.userId).then(user => {
+          res.render("calendars/show", { calendar, user });
+        });
+      } else {
+        res.send(404);
+      }
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+// ----------------------------------------
+// Create
+// ----------------------------------------
+router.post("/calendars", (req, res) => {
+  var body = req.body;
+  var name = body.calendar.name;
+  var username = body.user.username;
+
+  var calParams = {
+    name: body.calendar.name
+  };
+  User.findAll({
+    where: { username }
+  }).then(user => {
+    calParams.userId = user.id;
+    Calendar.create(calParams)
+      .then(calendar => {
+        res.redirect(`/calendars/${calendar.id}`);
+      })
+      .catch(e => res.status(500).send(e.stack));
+  });
 });
 
 module.exports = router;
