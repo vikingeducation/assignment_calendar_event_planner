@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 });
 
 
-const usersIndex = require('./routes/users');
+const userIndex = require('./routes/users');
 app.use('/', userIndex);
 
 // server

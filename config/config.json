@@ -1,14 +1,14 @@
 {
   "development": {
-    "username_env_var": "PG_USERNAME",
-    "password_env_var": "PG_PASSWORD",
+    "username": "blackwright",
+    "password": "password",
     "database": "assignment_calendar_event_planner_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username_env_var": "PG_USERNAME",
-    "password_env_var": "PG_PASSWORD",
+    "username": "blackwright",
+    "password": "password",
     "database": "assignment_calendar_event_planner_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
