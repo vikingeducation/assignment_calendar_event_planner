@@ -1,0 +1,42 @@
+<header class="page-header">
+  <h1>Calendars</h1>
+  <a href="/calendars/new" class="btn btn-primary">+ New Calendar</a>
+</header>
+
+
+{{#if records.length }}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Calendar Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each records as |record| }}
+      <tr>
+        <td>
+          <a href="/calendars/{{ record.calendar.id }}">{{ record.calendar.name }}</a>
+        </td>
+        <td>
+          <a href="/users/{{ record.user.id }}">{{ record.user.username }}</a>
+        </td>
+        <td>
+          {{ record.user.email }}
+        </td>
+        <td>
+          <a href="/calendars/{{ record.calendar.id }}/edit">Edit</a>
+        </td>
+        <td>
+          <a href="/calendars/{{ record.calendar.id }}?_method=delete" class="text-danger">Delete</a>
+        </td>
+      </tr>
+      {{/each }}
+    </tbody>
+  </table>
+{{else }}
+  <p class="text-danger">No users</p>
+{{/if }}
