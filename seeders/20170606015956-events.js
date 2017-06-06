@@ -1,5 +1,15 @@
 'use strict';
 const models = require('../models');
+const MIN_SEEDS = require('./seeding-config.json').minimum;
+
+const randomDate = () => {
+   let startDate = new Date(2012,0,1).getTime();
+   let endDate =  new Date(2015,0,1).getTime();
+   let spaces = (endDate - startDate);
+   let timestamp = Math.round(Math.random() * spaces);
+   timestamp += startDate;
+   return new Date(timestamp);
+};
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -14,13 +24,13 @@ module.exports = {
       }], {});
     */
     let events = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < MIN_SEEDS; i++) {
       events.push({
         name: `The Bazziest Foo${ i } Bar`,
         description: `This event is about stuff`,
-        date: `01/1${ i }/16`,
-        start: `0${ i }:0${ i } PM`,
-        end: `0${ i }:0${ i } AM`,
+        date: randomDate(),
+        start: randomDate(),
+        end: randomDate(),
         calendarId: i + 1
       });
     }

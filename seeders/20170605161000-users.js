@@ -1,5 +1,6 @@
 'use strict';
 const models = require('../models');
+const MIN_SEEDS = require('./seeding-config.json').minimum;
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -14,7 +15,7 @@ module.exports = {
       }], {});
     */
     let users = [];
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < MIN_SEEDS; i++) {
       users.push({
         fname: `Foo${ i }`,
         lname: `Bar${ i }`,

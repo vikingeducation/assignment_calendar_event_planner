@@ -83,8 +83,8 @@ const host = 'localhost';
 
 let args;
 process.env.NODE_ENV === 'production' ?
-  args = [port] :
-  args = [port, host];
+                          args = [port] :
+                          args = [port, host];
 
 args.push(() => {
   console.log(`Listening: http://${ host }:${ port }`);

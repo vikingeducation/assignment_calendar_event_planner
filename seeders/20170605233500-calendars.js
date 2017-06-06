@@ -1,5 +1,6 @@
 'use strict';
 const models = require('../models');
+const MIN_SEEDS = require('./seeding-config.json').minimum;
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -14,10 +15,10 @@ module.exports = {
       }], {});
     */
     let calendars = [];
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < MIN_SEEDS; i++) {
       calendars.push({
         name: `My Calendar ${ i }`,
-        userId: Math.floor((Math.random() * 10) + 1),
+        userId: Math.floor((Math.random() * MIN_SEEDS) + 1),
       });
     }
     return queryInterface.bulkInsert('Calendars', calendars);

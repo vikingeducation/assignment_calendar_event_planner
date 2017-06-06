@@ -65,6 +65,8 @@ router.get('/:id', (req, res) => {
     .then(result => {
       thisEvent = result;
       thisEvent.date = thisEvent.date.toString().slice(0, 15); // removes timestamp
+      thisEvent.start = thisEvent.start.toString().slice(0, 8);
+      thisEvent.end = thisEvent.end.toString().slice(0, 8);
       return Calendar.findById(thisEvent.calendarId);
     })
     .then(result => {

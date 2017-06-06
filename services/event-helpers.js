@@ -19,8 +19,10 @@ const attachDetailsToEvents = (events, calendars, users) => {
       }
     }
 
-    // removes timestamp from date information
+    // removes extra information from dates and times
     eachEvent.date = eachEvent.date.toString().slice(0, 15);
+    eachEvent.start = eachEvent.start.toString().slice(0, 8);
+    eachEvent.end = eachEvent.end.toString().slice(0, 8);
 
     return eachEvent;
   });
