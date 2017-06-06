@@ -51,8 +51,10 @@ app.use((req, res, next) => {
 // Routes
 // ----------------------------------------
 const users = require('./routers/users');
+const calendars = require('./routers/calendars');
 app.get('/', (req, res) => { res.redirect('/users'); });
 app.use('/users', users);
+app.use('/calendars', calendars);
 
 // ----------------------------------------
 // Template Engine

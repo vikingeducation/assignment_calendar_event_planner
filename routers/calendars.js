@@ -1,36 +1,50 @@
 const express = require('express');
 const router = express.Router();
 const models = require('./../models');
+const Calendar = models.Calendar;
 const User = models.User;
 const sequelize = models.sequelize;
+const { attachUserInfoToCalendars } = require('./../services/calendar-helpers');
 
 // ----------------------------------------
 // Index
 // ----------------------------------------
-const getAllUsers = (req, res) => {
-  User.findAll()
-    .then((users) => {
-      res.render('users/index', { users });
+const getAllCalendars = (req, res) => {
+  let allCalendars = Calendar.findAll();
+  let allUsers = User.findAll(); 
+
+  Promise.all([allCalendars, allUsers])
+    .then(values => {
+      let calendars = values[0];
+      let users = values[1];
+
+      let calendarsWithUserInfo = attachUserInfoToCalendars(calendars, users);
+      res.render('calendars/index', { calendars: calendarsWithUserInfo });
     })
-    .catch((e) => res.status(500).send(e.stack));
+    .catch(e => res.status(500).send(e.stack));
 };
-router.get('/', getAllUsers);
+
+router.get('/', getAllCalendars);
 
 // ----------------------------------------
 // New
 // ----------------------------------------
 router.get('/new', (req, res) => {
-  res.render('users/new');
+  User.findAll()
+    .then(users => {
+      res.render('calendars/new', { users });
+    })
+    .catch(e => res.status(500).send(e.stack));
 });
 
 // ----------------------------------------
 // Edit
 // ----------------------------------------
 router.get('/:id/edit', (req, res) => {
-  User.findById(req.params.id)
-    .then(user => {
-      if (user) {
-        res.render('users/edit', { user })
+  Calendar.findById(req.params.id)
+    .then(calendar => {
+      if (calendar) {
+        res.render('calendars/edit', { calendar })
       } else {
         res.send(404);
       }
@@ -42,15 +56,21 @@ router.get('/:id/edit', (req, res) => {
 // Show
 // ----------------------------------------
 router.get('/:id', (req, res) => {
-  User.findById(req.params.id)
+  let calendar;
+
+  Calendar.findById(req.params.id)
+    .then(result => {
+      calendar = result;
+      return User.findById(calendar.userId);
+    })
     .then(user => {
-      if (user) {
-        res.render('users/show', { user });
+      if (calendar && user) {
+        res.render('calendars/show', { calendar, user });
       } else {
         res.send(404);
       }
     })
-    .catch((e) => res.status(500).send(e.stack));
+    .catch(e => res.status(500).send(e.stack));
 });
 
 // ----------------------------------------
@@ -59,16 +79,15 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   let body = req.body;
 
-  let userParams = {
-    fname: body.user.fname,
-    lname: body.user.lname,
-    username: body.user.username,
-    email: body.user.email
+  let calendarParams = {
+    name: body.calendar.name,
+    userId: body.calendar.owner,
   };
 
-  User.create(userParams)
-    .then((user) => {
-      res.redirect(`/users/${ user.id }`);
+  // res.redirect('/calendars');
+  Calendar.create(calendarParams)
+    .then(calendar => {
+      res.redirect(`/calendars/${ calendar.id }`);
     })
     .catch((e) => res.status(500).send(e.stack));
 });
@@ -77,20 +96,17 @@ router.post('/', (req, res) => {
 // Update
 // ----------------------------------------
 router.put('/:id', (req, res) => {
-  var userParams = req.body.user;
+  var calendarParams = req.body.calendar;
 
-  User.update({
-    fname: userParams.fname,
-    lname: userParams.lname,
-    username: userParams.username,
-    email: userParams.email
+  Calendar.update({
+    name: calendarParams.name
   }, {
     where: { id: req.params.id },
     limit: 1
   })
     .then(() => {
       req.method = 'GET';
-      res.redirect(`/users/${ req.params.id }`);
+      res.redirect(`/calendars/${ req.params.id }`);
     })
     .catch((e) => res.status(500).send(e.stack));
 });
@@ -99,16 +115,17 @@ router.put('/:id', (req, res) => {
 // Destroy
 // ----------------------------------------
 router.delete('/:id', (req, res) => {
-  User.destroy({
+  Calendar.destroy({
     where: { id: req.params.id },
     limit: 1
   })
     .then(() => {
       req.method = 'GET';
-      res.redirect('/users');
+      res.redirect('/calendars');
     })
     .catch((e) => res.status(500).send(e.stack));
 });
+
 
 
 module.exports = router;
