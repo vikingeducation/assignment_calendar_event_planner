@@ -84,7 +84,6 @@ router.post('/', (req, res) => {
     userId: body.calendar.owner,
   };
 
-  // res.redirect('/calendars');
   Calendar.create(calendarParams)
     .then(calendar => {
       res.redirect(`/calendars/${ calendar.id }`);
