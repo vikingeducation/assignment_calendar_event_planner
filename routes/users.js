@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var models = require('./../models');
-var User = models.User;
+var User = models.user;
 var sequelize = models.sequelize;
 
 var onIndex = (req, res) => {

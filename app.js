@@ -6,8 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('express-hbs');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+
 
 var app = express();
 
@@ -59,6 +58,12 @@ app.use((req, res, next) => {
 
 var usersRoutes = require('./routes/users');
 app.use('/', usersRoutes);
+
+var calendarsRoutes = require('./routes/calendars');
+app.use('/calendars', calendarsRoutes);
+
+var eventRoutes = require('./routes/events');
+app.use('/events', eventRoutes);
 
 app.use((req, res, next) => {
   ['query', 'params', 'body'].forEach((key) => {
