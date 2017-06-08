@@ -65,6 +65,9 @@ app.use('/calendars', calendarsRoutes);
 var eventRoutes = require('./routes/events');
 app.use('/events', eventRoutes);
 
+var inviteRoutes = require('./routes/invitations');
+app.use('/invitations', inviteRoutes);
+
 app.use((req, res, next) => {
   ['query', 'params', 'body'].forEach((key) => {
     if (req[key]) {
