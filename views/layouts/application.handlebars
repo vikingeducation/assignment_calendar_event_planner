@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Loading Bootstrap -->
+  <link href="/styles/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Loading Flat UI -->
+  <link href="/styles/flat-ui.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/styles/styles.css">
+
+  <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+  <script src="/scripts/vendor/jquery.min.js" defer></script>
+
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/scripts/flat-ui.min.js" defer></script>
+
+  <title>
+    Calendar Event Planner
+    {{#if title }}
+      | {{ title }}
+    {{/if }}
+    </title>
+</head>
+<body>
+  {{> shared/_nav }}
+  <main class="container">
+    {{{ body }}}
+  </main>
+
+
+</body>
+</html>
