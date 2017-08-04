@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 const usersRoutes = require("./routers/users");
 app.use("/users", usersRoutes);
 
-const calendarRoutes = require("./routers/calendar");
+const calendarRoutes = require("./routers/calendars");
 app.use("/calendars", calendarRoutes);
 
 // Set up port/host

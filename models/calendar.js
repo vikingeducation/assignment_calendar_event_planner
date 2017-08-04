@@ -1,17 +1,15 @@
-'use strict';
+"use strict";
 module.exports = function(sequelize, DataTypes) {
-	var Calendar = sequelize.define('Calendar', {
-		name: DataTypes.STRING,
-		userId: DataTypes.INTEGER
-	});
+  var Calendar = sequelize.define("Calendar", {
+    name: DataTypes.STRING,
+    userId: DataTypes.INTEGER
+  });
 
-	Calendar.associate = function(models) {
-		Calendar.belongsTo(models.User, {
-			foreignKey: 'userId',
-			onDelete: 'cascade',
-			hooks: true
-		});
-	};
+  Calendar.associate = function(models) {
+    Calendar.belongsTo(models.User, {
+      foreignKey: "userId"
+    });
+  };
 
-	return Calendar;
+  return Calendar;
 };
