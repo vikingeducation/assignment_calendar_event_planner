@@ -15,13 +15,10 @@ module.exports = {
     */
 
     let calendars = [];
-    for (let userId = 0; userId < 10; userId++) {
-      for (let calendarId = 0; calendarId < 4; calendarId++) {
-        calendars.push({
-          name: `MyCalendar{i}`,
-          userId: userId
-        });
-      }
+    for (let calendarId = 0; calendarId < 4; calendarId++) {
+      calendars.push({
+        name: `MyCalendar{i}`
+      });
     }
 
     return queryInterface.bulkInsert("Calendars", calendars);

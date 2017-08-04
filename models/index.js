@@ -42,5 +42,6 @@ db.Sequelize = Sequelize;
 
 // Relations
 db.User.hasMany(db.Calendar);
+db.Calendar.belongsTo(db.User);
 
 module.exports = db;
