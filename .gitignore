@@ -1,5 +1,11 @@
 node_modules/
+<<<<<<< HEAD
 config.json/
 models/
 seeders/
 migrations/
+=======
+migrations/
+seeders/
+models/
+>>>>>>> 9e3cdda82f1f409adf9c501bdc475b221f85be90

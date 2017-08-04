@@ -1,10 +1,11 @@
 
 
 <header class="page-header">
-  <h1>Calendar: {{ calendar.name }}, {{ calendar.userId }}</h1>
-  <a href="/calendar/{{ calendar.id }}/edit" class="btn btn-primary">Edit</a>
-  <a href="/calendar/{{ calendar.id }}?_method=delete" class="btn btn-danger">Delete</a>
-</header>
+  <h1>Event: {{ calevent.name }}</h1>
+  <h2>Description: {{ calevent.description }}</h2>
+  <h2>Date: {{ calevent.date }}</h2>
+  <h2>Start: {{ calevent.start }}</h2>
+  <h2>End: {{ calevent.end }}</h2>
 
-<p>Name: {{ calendar.name }}</p>
-<p>Creator: {{ calendar.userId }}</p>
+ 
+</header>
