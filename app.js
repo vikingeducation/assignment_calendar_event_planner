@@ -16,6 +16,7 @@ app.use(methodOverride(getPostSupport.callback, getPostSupport.options));
 // Set up morgan routes
 app.use(morgan("tiny"));
 app.use(morganToolKit());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/", userRoutes);
 

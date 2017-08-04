@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/users/:id", (req, res) => {
-  console.log(req.body);
+  console.log(`${req.body}`);
   res.end("post request :(");
 });
 
@@ -24,9 +24,10 @@ router.get("/users/:id/edit", (req, res) => {
   });
 });
 
-router.post("/users/:id/edit/put", (req, res) {
-
-})
+// router.post("/users/:id/edit/put", (req, res) {
+//
+// })
+//
 
 router.put("/users/:id", (req, res) => {
   let userInfo = req.body.user;
