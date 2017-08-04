@@ -9,10 +9,7 @@ module.exports = function(sequelize, DataTypes) {
 
 	User.associate = function(models) {
 		User.hasMany(models.Calendar, {
-			foreignKey: 'userId',
-			constraints: true,
-			onDelete: 'CASCADE',
-			hooks: true
+			foreignKey: 'userId'
 		});
 	};
 

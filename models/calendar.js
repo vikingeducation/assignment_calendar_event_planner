@@ -7,7 +7,9 @@ module.exports = function(sequelize, DataTypes) {
 
 	Calendar.associate = function(models) {
 		Calendar.belongsTo(models.User, {
-			foreignKey: 'userId'
+			foreignKey: 'userId',
+			onDelete: 'cascade',
+			hooks: true
 		});
 	};
 
