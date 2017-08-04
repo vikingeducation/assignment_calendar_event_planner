@@ -9,6 +9,9 @@ const morganToolKit = require("morgan-toolkit")(morgan, {
   req: ["cookies", "signedCookies"]
 });
 
+const userRoutes = require("./routers/users");
+app.use('/', userRoutes);
+
 app.use(methodOverride(getPostSupport.callback, getPostSupport.options));
 
 // Set up morgan routes
@@ -35,7 +38,3 @@ args.push(() => {
 });
 
 app.listen.apply(app, args);
-
-app.get("/", (req, res) => {
-  res.render("users");
-});
