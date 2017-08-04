@@ -10,6 +10,8 @@ const morganToolKit = require("morgan-toolkit")(morgan, {
 });
 
 const userRoutes = require("./routers/users");
+const calendarRoutes = require("./routers/calendar");
+
 console.log(getPostSupport.options);
 app.use(methodOverride(getPostSupport.callback, getPostSupport.options));
 
@@ -19,6 +21,7 @@ app.use(morganToolKit());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/", userRoutes);
+app.use("/", calendarRoutes);
 
 // Express handlebars
 const hbs = expressHandlebars.create({
