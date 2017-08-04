@@ -1,0 +1,27 @@
+{
+  "name": "assignment_calendar_event_planner",
+  "version": "1.0.0",
+  "description": "I'll pencil you in on Tuesday around noonish?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdTriplett/assignment_calendar_event_planner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EdTriplett/assignment_calendar_event_planner/issues"
+  },
+  "homepage": "https://github.com/EdTriplett/assignment_calendar_event_planner#readme",
+  "dependencies": {
+    "g": "^2.0.1",
+    "morgan": "^1.8.2",
+    "morgan-toolkit": "^1.0.2",
+    "pg": "^7.1.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.4.2"
+  }
+}
