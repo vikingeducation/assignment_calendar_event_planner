@@ -9,6 +9,9 @@ module.exports = function(sequelize, DataTypes) {
     Calendar.belongsTo(models.User, {
       foreignKey: "userId"
     });
+    Calendar.hasMany(models.CalendarEvent, {
+      foreignKey: "calendarId"
+    });
   };
 
   return Calendar;
