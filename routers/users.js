@@ -3,7 +3,7 @@ var router = express.Router();
 var models = require("./../models");
 var User = models.User;
 var Calendar = models.Calendar;
-var Calevent = models.Calevent;
+var Calevent = models.calEvent;
 var sequelize = models.sequelize;
 
 // ----------------------------------------
@@ -40,7 +40,7 @@ router.get("/calendar/new", (req, res) => {
   res.render("calendar/new");
 });
 router.get("/calendar/:id/event/new", (req, res) => {
-  res.render("events/new", { calender: req.params.id });
+  res.render("events/new", { calendar: req.params.id });
 });
 // ----------------------------------------
 // Edit
@@ -95,6 +95,35 @@ router.get("/calendar/:id", (req, res) => {
     .catch(e => res.status(500).send(e.stack));
 });
 
+router.get("/calendar/:id/events", (req, res) => {
+  Calevent.findAll(
+    {where: {
+      calendarId: req.params.id  
+    }}
+  )
+    .then(event => {
+      if (event) {
+        res.render("events/index", { event });
+      } else {
+        res.send(404);
+      }
+    })
+    .catch(e => res.status(500).send(e.stack));
+})
+
+router.get("/event/:id", (req, res) => {
+  Calevent.findById(req.params.id)
+    .then(calevent => {
+      if (calevent) {
+        res.render("events/show", { calevent });
+      } else {
+        res.send(404);
+      }
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+
 // ----------------------------------------
 // Create
 // ----------------------------------------
@@ -128,7 +157,7 @@ router.post("/calendar", (req, res) => {
     })
     .catch(e => res.status(500).send(e.stack));
 });
-router.post("/calendar/:id", (req, res) => {
+router.post("/calendar/:id/event", (req, res) => {
   var body = req.body;
 
   var eventParams = {
@@ -137,12 +166,12 @@ router.post("/calendar/:id", (req, res) => {
     date: body.event.date,
     start: body.event.start,
     end: body.event.end,
-    calenderId: body.event.calenderId
+    calendarId: req.params.id
   };
 
   Calevent.create(eventParams)
     .then(event => {
-      res.redirect(`/calendar/${event.calendarId}`);
+      res.redirect(`/calendar/${req.params.id}`);
     })
     .catch(e => res.status(500).send(e.stack));
 });
