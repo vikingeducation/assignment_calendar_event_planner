@@ -1,0 +1,26 @@
+<h1>Calendars Index</h1>
+
+<button>New Calendar</button>
+
+<table>
+	<thead>
+		<tr>
+			<th>Calendar Name</th>
+			<th>Username</th>
+			<th>Email</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each calendars as |calendar|}}
+		<tr>
+			<td>{{calendar.name}}</td>
+			<td>{{calendar.username}}</td>
+			<td>{{calendar.email}}</td>
+			<td>Edit</td>
+			<td>Delete</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>

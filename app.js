@@ -11,6 +11,7 @@ require("dotenv").config();
 
 const port = 3000;
 const index = require("./routes/index");
+const calendars = require("./routes/calendars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("views", path.join(__dirname, "views"));
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride(getPostSupport.callback, getPostSupport.options));
 
 app.use("/", index);
+app.use("/calendars", calendars);
 
 app.listen(port, () => {
 	console.log(`Now listening on port http://localhost:${port}`);
