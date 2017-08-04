@@ -1,14 +1,14 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
-
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const getPostSupport = require("express-method-override-get-post-support");
+const morgan = require("morgan");
+const usersRoutes = require("./routers/users");
+const calendarsRoutes = require("./routers/calendars");
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/public`));
-
-var morgan = require("morgan");
 app.use(morgan("tiny"));
 app.use((req, res, next) => {
   ["query", "params", "body"].forEach(key => {
@@ -28,8 +28,8 @@ app.use(
   )
 );
 
-var usersRoutes = require("./routers/users");
 app.use("/", usersRoutes);
+app.use("/calendars", calendarsRoutes);
 
 var expressHandlebars = require("express-handlebars");
 
