@@ -53,5 +53,18 @@ module.exports = {
 				res.redirect(`/users/${req.params.id}`);
 			})
 			.catch(e => res.status(500).send(e.stack));
+	},
+
+	remove: (req, res) => {
+		let options = {
+			where: { id: req.params.id },
+			limit: 1
+		};
+
+		User.destroy(options)
+			.then(user => {
+				res.redirect("/");
+			})
+			.catch(e => res.status(500).send(e.stack));
 	}
 };

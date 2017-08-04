@@ -18,10 +18,17 @@
 		<tr>
 			<td>{{user.fname}}</td>
 			<td>{{user.lname}}</td>
-			<td>{{user.username}}</td>
+			<td><a href="/users/{{user.id}}">{{user.username}}</a></td>
 			<td>{{user.email}}</td>
-			<td><a>Edit</a></td>
-			<td><a>Delete</a></td>
+			<td>
+				<a href="/user/{{user.id}}/edit"><button>Edit</button></a>
+			</td>
+			<td>
+				<form action="/user/{{user.id}}/delete" method="POST">
+					<input type="hidden" name="_method" value="DELETE">
+					<button>Delete</button>
+				</form>
+			</td>
 		</tr>
 	{{/each}}
 	</tbody>

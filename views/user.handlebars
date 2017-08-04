@@ -1,7 +1,11 @@
 <h1>User: {{user.fname}} {{user.lname}}</h1>
 
-<button>Edit</button>
-<button>Delete</button>
+<a href="/user/{{user.id}}/edit"><button>Edit</button></a>
+
+<form action="/user/{{user.id}}/delete" method="POST">
+	<input type="hidden" name="_method" value="DELETE">
+	<button>Delete</button>
+</form>
 
 <table>
 	<tr>
