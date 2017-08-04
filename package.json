@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/EdTriplett/assignment_calendar_event_planner#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express-handlebars": "^3.0.0",
     "g": "^2.0.1",
     "morgan": "^1.8.2",
     "morgan-toolkit": "^1.0.2",
