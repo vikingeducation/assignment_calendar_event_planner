@@ -1,0 +1,29 @@
+{
+  "name": "sqliz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "express-method-override-get-post-support": "0.0.7",
+    "method-override": "^2.3.9",
+    "morgan": "^1.8.2",
+    "morgan-toolkit": "^1.0.2",
+    "pg": "^7.0.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.4.2",
+    "sequelize-cli": "^2.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "which nodemon > /dev/null && nodemon app.js || node app.js",
+    "sql": "node_modules/sequelize-cli/bin/sequelize",
+    "seed": "npm run sql db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+    "console": "node repl.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
