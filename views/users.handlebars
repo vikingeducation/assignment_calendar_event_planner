@@ -1,4 +1,6 @@
-<button type="button" class="btn btn-success">+ New User</button>
+<a href="/users/create" type="button" class="btn btn-success">+ New User</a>
+<header><h1>Index Of All Users</h1>
+</header>
 
 <div class="table-responsive">
   <table class="table">
@@ -15,12 +17,12 @@
     <tbody>
       {{#each users as |user|}}
       <tr>
-        <td>{{user.firstName}}</td>
-        <td>{{user.lastName}}</td>
-        <td>{{user.username}}</td>
-        <td>{{user.email}}</td>
-        <th><button class="btn btn-primary">Edit</button></th>
-        <th><button class="btn btn-danger">Delete</button></th>
+        <td><a href="/users/{{user.id}}"> {{user.firstName}}</a></td>
+        <td><a href="/users/{{user.id}}"> {{user.lastName}}</a></td>
+        <td><a href="/users/{{user.id}}"> {{user.username}}</a></td>
+        <td><a href="/users/{{user.id}}"> {{user.email}}</a></td>
+        <td><a href="/users/{{user.id}}/edit" class="btn btn-primary">Edit</a></td>
+        <td><a href="/users/{{user.id}}?_method=DELETE" class="btn btn-danger">Delete</a></td>
       </tr>
       {{/each}}
     </tbody>
