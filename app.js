@@ -35,15 +35,12 @@ var expressHandlebars = require("express-handlebars");
 
 var hbs = expressHandlebars.create({
   partialsDir: "views/",
-  defaultLayout: "application"
+  defaultLayout: "main"
 });
 
-app.engine("handlebars", hbs.engine);
+app.engine("handlebars", hbs.engine); //hbs.engine ??
 app.set("view engine", "handlebars");
 
-// ----------------------------------------
-// Server
-// ----------------------------------------
 var port = process.env.PORT || process.argv[2] || 3000;
 var host = "localhost";
 
