@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const Model = require('sequelize').Model;
+
 // Templates
 const expressHandlebars = require('express-handlebars');
 const hbs = expressHandlebars.create({
@@ -29,17 +31,36 @@ app.get('/', (req, res) => {
 });
 
 // Redirect Sugar
-express.response.doRedirect = function(path) {
+express.response.doRedirect = function(location) {
 	let _this = this;
-	return function() {
-		_this.redirect(path);
-	};
+
+	if (typeof location === 'object') {
+		let path;
+		if (location instanceof Model) {
+			// Get the model name in plural format and lowercase it.
+			path =
+				'/' +
+				location._modelOptions.name.plural.toLowerCase() +
+				'/' +
+				location.get('id');
+		} else {
+			path = '/';
+		}
+		//_this.redirect(path);
+	} else if (typeof location === 'string') {
+		return function() {
+			console.log(_this);
+			_this.redirect(location);
+		};
+	}
 };
 
 // Routes
-app.use('/users', require('./routers/users'));
-app.use('/calendars', require('./routers/calendars'));
-app.use('/events', require('./routers/events'));
+const usersRoutes = require('./routers/users');
+app.use('/users', usersRoutes);
+
+const calendarRoutes = require('./routers/calendars');
+app.use('/calendars', calendarRoutes);
 
 // Set up port/host
 const port = process.env.PORT || process.argv[2] || 3000;
