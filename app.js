@@ -6,13 +6,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const methodOverride = require("method-override");
 const getPostSupport = require("express-method-override-get-post-support");
 
-app.use(
-  methodOverride(
-    getPostSupport.callback,
-    getPostSupport.options // { methods: ['POST', 'GET'] }
-  )
-);
-
 app.use(express.static(`${__dirname}/public`));
 
 var morgan = require("morgan");
@@ -27,6 +20,13 @@ app.use((req, res, next) => {
   });
   next();
 });
+
+app.use(
+  methodOverride(
+    getPostSupport.callback,
+    getPostSupport.options // { methods: ['POST', 'GET'] }
+  )
+);
 
 var usersRoutes = require("./routers/users");
 app.use("/", usersRoutes);
