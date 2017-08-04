@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
   })
 });
 
-router.get("/", (req, res) => {
+router.put("//users/:id", (req, res) => {
 
 })
 
