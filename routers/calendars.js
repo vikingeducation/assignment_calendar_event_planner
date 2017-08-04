@@ -19,14 +19,14 @@ router.get("/new", (req, res) => {
 
 router.get("/:id", (req, res) => {
   let id = req.params.id;
-  calendars.findById(id).then(calendars => {
-    console.log(calendars);
+  calendars.findById(id).then(calendar => {
+    console.log(calendar);
     users
       .findOne({
-        where: { id: calendars.userid }
+        where: { id: calendar.userid }
       })
       .then(user => {
-        res.render("calendars/show", { calendar: calendars, user: user });
+        res.render("calendars/show", { calendar: calendar, user: user });
       });
   });
 });
@@ -44,16 +44,17 @@ router.post("/", (req, res) => {
     email: req.body.email.trim()
   };
   console.log(`params = ${params.email}`);
+  let hope = params.email;
   users
     .findAll({
-      where: { email: params.email }
+      where: { email: hope }
     })
     .then(user => {
       //console.log(`USER IS ${user.getDataValue("id")}`);
       calendars
         .create({
-          userid: user.id,
-          name: params.name
+          name: params.name,
+          userid: user.id
         })
         .then(calendar => {
           res.redirect("/calendars");
