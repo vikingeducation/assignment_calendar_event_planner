@@ -20,44 +20,54 @@ router.get("/new", (req, res) => {
 router.get("/:id", (req, res) => {
   let id = req.params.id;
   calendars.findById(id).then(calendars => {
-    res.render("calendars/show", { calendars });
+    console.log(calendars);
+    users
+      .findOne({
+        where: { id: calendars.userid }
+      })
+      .then(user => {
+        res.render("calendars/show", { calendar: calendars, user: user });
+      });
   });
 });
-//
-// router.get("/calendars/:id/edit", (req, res) => {
-//   let id = req.params.id;
-//   calendars.findById(id).then(calendars => {
-//     res.render("calendars/edit", { calendars });
-//   });
-//   console.log("GOT A A GET /EDIT");
-// });
+
+router.get("/calendars/:id/edit", (req, res) => {
+  let id = req.params.id;
+  calendars.findById(id).then(calendars => {
+    res.render("calendars/edit", { calendars });
+  });
+});
 
 router.post("/", (req, res) => {
   let params = {
     name: req.body.name.trim(),
     email: req.body.email.trim()
   };
+  console.log(`params = ${params.email}`);
   users
     .findAll({
-      where: { email: email }
+      where: { email: params.email }
     })
     .then(user => {
+      //console.log(`USER IS ${user.getDataValue("id")}`);
       calendars
         .create({
           userid: user.id,
           name: params.name
         })
         .then(calendar => {
-          res.redirect("/");
+          res.redirect("/calendars");
         });
     });
-
-  // users
-  //   .create(params)
-  //   .then(user => {
-  //     res.redirect(`/users/${user.id}`);
-  //   })
-  //   .catch(e => res.status(500).send(e.stack));
 });
+//think about drying up with this
+// let lookUpUser = (userId )=>{
+//   .findAll({
+//     where: { id: userId }
+//   })
+//   .then(user => {
+//     return user
+//   });
+// }
 
 module.exports = router;

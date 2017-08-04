@@ -21,6 +21,12 @@ module.exports = {
         email: `foobar${i}@gmail.com`
       });
     }
+    users.push({
+      fname: `Bob`,
+      lname: `Segar`,
+      username: `NyghtMoves`,
+      email: `WaitingOnTheThunder@aol.com`
+    });
     return queryInterface.bulkInsert("users", users);
   },
 

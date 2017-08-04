@@ -25,6 +25,7 @@ router.get("/users/:id", (req, res) => {
   });
 });
 
+//edit page
 router.get("/users/:id/edit", (req, res) => {
   let id = req.params.id;
   users.findById(id).then(user => {
