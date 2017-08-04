@@ -4,7 +4,10 @@
   "description": "I'll pencil you in on Tuesday around noonish?",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "npm run sql db:migrate:undo:all && npm run sql db:migrate && npm run sql db:seed:all",
+    "seeds": "npm run sql db:migrate:undo:all && npm run sql db:migrate && npm run sql db:seed:all",
+    "sql": "node_modules/sequelize-cli/bin/sequelize"
   },
   "repository": {
     "type": "git",

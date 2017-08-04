@@ -16,6 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   );
-
   return User;
 };
+
+//sequelize model:create --name Calendar --attributes "name:string userId:string"

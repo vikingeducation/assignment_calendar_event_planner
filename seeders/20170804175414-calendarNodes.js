@@ -1,6 +1,3 @@
-"use strict";
-var models = require("./../models");
-
 module.exports = {
   up: function(queryInterface, Sequelize) {
     /*
@@ -13,16 +10,14 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    var users = [];
+    var calendarNodes = [];
     for (let i = 0; i < 10; i++) {
       users.push({
-        fname: `Foo${i}`,
-        lname: `Bar${i}`,
-        username: `foobar${i}`,
-        email: `foobar${i}@gmail.com`
+        name: `Foo${i}`,
+        userId: "User${ i }"
       });
     }
-    return queryInterface.bulkInsert("Users", users);
+    return queryInterface.bulkInsert("Calendar", calendarNodes);
   },
 
   down: function(queryInterface, Sequelize) {
@@ -33,6 +28,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('Person', null, {});
     */
-    return queryInterface.bulkDelete("Users", null, {}, models.User);
+    return queryInterface.bulkDelete("Calendar", null, {}, models.User);
   }
 };

@@ -1,35 +1,32 @@
-'use strict';
+"use strict";
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Comments', {
+    return queryInterface.createTable("Calendars", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      body: {
-        type: Sequelize.TEXT
+      name: {
+        type: Sequelize.STRING
       },
       userId: {
-        type: Sequelize.INTEGER
-      },
-      postId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW')
+        defaultValue: Sequelize.fn("NOW")
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW')
+        defaultValue: Sequelize.fn("NOW")
       }
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Comments');
+    return queryInterface.dropTable("Calendars");
   }
 };
