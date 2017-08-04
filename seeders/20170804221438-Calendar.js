@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 const models = require("../models");
 
 module.exports = {
-  up: function (queryInterface, Sequelize) {
+  up: function(queryInterface, Sequelize) {
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -24,7 +24,7 @@ module.exports = {
     return queryInterface.bulkInsert("Calendar", calendars);
   },
 
-  down: function (queryInterface, Sequelize) {
+  down: function(queryInterface, Sequelize) {
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
@@ -32,6 +32,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('Person', null, {});
     */
-   return queryInterface.bulkDelete("users", null, {}, models.calendar);
+    return queryInterface.bulkDelete("Calendar", null, {}, models.Calendar);
   }
 };
