@@ -1,5 +1,5 @@
 "use strict";
-
+let models = require("../models");
 module.exports = {
   up: function(queryInterface, Sequelize) {
     let events = [];
@@ -18,7 +18,7 @@ module.exports = {
 
   down: function(queryInterface, Sequelize) {
     return queryInterface.bulkDelete(
-      "CalendarEvent",
+      "CalendarEvents",
       null,
       {},
       models.CalendarEvent
