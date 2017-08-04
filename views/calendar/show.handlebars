@@ -1,0 +1,19 @@
+
+
+<header class="page-header">
+  <h1>Calendar: {{ calendar.name }}, {{ calendar.userId }}</h1>
+  <a href="/calendar/{{ calendar.id }}/edit" class="btn btn-primary">Edit</a>
+  <a href="/calendar/{{ calendar.id }}?_method=delete" class="btn btn-danger">Delete</a>
+</header>
+  
+ {{!--  {{#each calendar.events as |newEvent|}}
+    <a href='/calendar/{{calendar.id}}/event/{{newEvent}}'>{{newEvent}}</a>
+  {{/each}} --}}
+
+<p>Name: {{ calendar.name }}</p>
+<p>Creator: {{ calendar.userId }}</p>
+
+
+<a href="/calendar/{{ calendar.id }}/events" class="btn btn-primary">Show Events</a>
+
+<a href="/calendar/{{ calendar.id }}/event/new" class="btn btn-primary">+ New Event</a>

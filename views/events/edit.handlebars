@@ -1,0 +1,36 @@
+
+
+<header class="page-header">
+  <h1>Edit Event: {{ event.name }}</h1>
+</header>
+
+
+<form action="/calendar/{{ event.calenderId }}/event/{{ event.id }}" method="post">
+  <input type="hidden" name="_method" value="PUT">
+
+  <h2>Event Info</h2>
+  <div class="form-group">
+    <label for="event_name">Name</label>
+    <input type="text" class="form-control" name="event[name]" id="event_name" value="{{ event.name }}">
+  </div>
+  <div class="form-group">
+    <label for="event_date">Date</label>
+    <input type="text" class="form-control" name="event[name]" id="event_name" value="{{ event.date }}">
+  </div>
+  <div class="form-group">
+    <label for="event_start">Starts at</label>
+    <input type="text" class="form-control" name="event[name]" id="event_name" value="{{ event.start }}">
+  </div>
+  <div class="form-group">
+    <label for="event_end">Ends at</label>
+    <input type="text" class="form-control" name="event[name]" id="event_name" value="{{ event.end }}">
+  </div>
+  <div class="form-group">
+    <label for="event_description">Description</label>
+    <input type="text" class="form-control" name="event[name]" id="event_name" value="{{ event.description }}">
+  </div>
+
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary">
+  </div>
+</form>
