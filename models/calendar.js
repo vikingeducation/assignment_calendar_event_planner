@@ -8,14 +8,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
       classMethods: {
-        associate: function(models) {
-          Calendar.belongsTo(models.User, {
-            foreignKey: "userId",
-            foreignKeyConstraint: true
-          });
-        }
+        associate: function(models) {}
       }
     }
   );
+  Calendar.associate = function(models) {
+    Calendar.belongsTo(models.User, {
+      foreignKey: "userId"
+    });
+  };
   return Calendar;
 };

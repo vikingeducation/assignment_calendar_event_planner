@@ -10,15 +10,16 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
       classMethods: {
-        associate: function(models) {
-          User.hasMany(models.Calendar, {
-            foreignKey: "userId",
-            foreignKeyConstraint: true,
-            onDelete: "CASCADE"
-          });
-        }
+        associate: function(models) {}
       }
     }
   );
+  User.associate = function(models) {
+    User.hasMany(models.Calendar, {
+      foreignKey: "userId",
+      onDelete: "CASCADE"
+    });
+  };
+
   return User;
 };
