@@ -1,6 +1,7 @@
 
-
-<form action="/users/{{user.id}}" method="POST">
+<header><h1>Edit User: {{user.lastName}}, {{user.firstName}}</h1>
+</header>
+<form action="/users/{{user.id}}?_method=PUT" method="post">
   <div class="form-group">
     <label>First Name</label>
     <input type="text" class="form-control" name="user[firstName]" value="{{user.firstName}}">

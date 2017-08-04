@@ -10,13 +10,14 @@ const morganToolKit = require("morgan-toolkit")(morgan, {
 });
 
 const userRoutes = require("./routers/users");
-app.use('/', userRoutes);
-
+console.log(getPostSupport.options);
 app.use(methodOverride(getPostSupport.callback, getPostSupport.options));
 
 // Set up morgan routes
 app.use(morgan("tiny"));
 app.use(morganToolKit());
+
+app.use("/", userRoutes);
 
 // Express handlebars
 const hbs = expressHandlebars.create({
