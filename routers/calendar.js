@@ -6,12 +6,11 @@ const Calendar = models.Calendar;
 const sequelize = models.sequelize;
 
 router.get('/', (req, res) => {
-	let CalendarsPromise = Calendar.findAll()
-		.then(results => {
+	Calendar.findAll({ include: User })
+		.then(calendars => {
 			res.render('calendars/index', {
 				title: 'Calendars',
-				calendars: results.calendars,
-				user: results.user
+				calendars: calendars
 			});
 		})
 		.catch(e => res.status(500).send(e.stack));
@@ -20,30 +19,35 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 	const body = req.body;
 
-	const userParams = {
-		fname: body.calendar.fname,
-		lname: body.calendar.lname,
-		username: body.calendar.username,
-		email: body.calendar.email
+	const calendarParams = {
+		name: body.calendar.name,
+		userId: body.calendar.userId
 	};
 
-	Calendar.create(userParams)
+	Calendar.create(calendarParams)
 		.then(calendar => {
-			res.redirect(`/${calendar.id}`);
+			res.redirect(`/calendars/${calendar.id}`);
 		})
 		.catch(e => res.status(500).send(e.stack));
 });
 
 router.get('/new', (req, res) => {
-	res.render('calendars/new', { title: 'New Calendar' });
+	User.findAll().then(users => {
+		console.log(users);
+		res.render('calendars/new', {
+			title: 'New Calendar',
+			users: users
+		});
+	});
 });
 
 router.get('/:id', (req, res) => {
-	Calendar.findById(req.params.id)
+	Calendar.findById(req.params.id, { include: User })
 		.then(calendar => {
 			if (calendar) {
 				res.render('calendars/show', {
-					title: `${calendar.fname} ${calendar.lname}`
+					title: `${calendar.name}`,
+					calendar: calendar
 				});
 			} else {
 				res.send(404);
@@ -58,20 +62,20 @@ router.delete('/:id', (req, res) => {
 		limit: 1
 	})
 		.then(() => {
-			res.redirect('');
+			res.redirect('/calendars');
 		})
 		.catch(e => res.status(500).send(e.stack));
 });
 
 router.put('/:id', (req, res) => {
-	const userParams = req.body.calendar;
+	const calendarParams = req.body.calendar;
 
 	Calendar.update(
 		{
-			fname: userParams.fname,
-			lname: userParams.lname,
-			username: userParams.username,
-			email: userParams.email
+			fname: calendarParams.fname,
+			lname: calendarParams.lname,
+			username: calendarParams.username,
+			email: calendarParams.email
 		},
 		{
 			where: { id: req.params.id },
@@ -80,7 +84,7 @@ router.put('/:id', (req, res) => {
 	)
 		.then(() => {
 			req.method = 'GET';
-			res.redirect(`/${req.params.id}`);
+			res.redirect(`/calendars/${req.params.id}`);
 		})
 		.catch(e => res.status(500).send(e.stack));
 });

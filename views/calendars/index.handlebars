@@ -1,6 +1,6 @@
-Calendars<header class="page-header">
+<header class="page-header">
   <h1>Calendars</h1>
-  <a href="/calendars/new" class="btn btn-primary">+ New User</a>
+  <a href="/calendars/new" class="btn btn-primary">+ New Calendar</a>
 </header>
 
 
@@ -8,8 +8,7 @@ Calendars<header class="page-header">
 <table class="table">
   <thead>
     <tr>
-      <th>Firstname</th>
-      <th>Last Name</th>
+      <th>Calendar Name</th>
       <th>Username</th>
       <th>Email</th>
       <th></th>
@@ -23,10 +22,10 @@ Calendars<header class="page-header">
         <a href="/calendars/{{ calendar.id }}">{{ calendar.name }}</a>
       </td>
       <td>
-        <a href="/calendars/{{ calendar.id }}">{{ user.username }}</a>
+        <a href="/calendars/{{ calendar.id }}">{{ calendar.User.username }}</a>
       </td>
       <td>
-        <a href="/calendars/{{ calendar.id }}">{{ user.email }}</a>
+        <a href="/calendars/{{ calendar.id }}">{{ calendar.User.email }}</a>
       </td>
       <td>
         <a href="/calendars/{{ calendar.id }}/edit">Edit</a>

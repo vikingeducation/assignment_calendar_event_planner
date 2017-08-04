@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
 
 	User.create(userParams)
 		.then(user => {
-			res.redirect(`/${user.id}`);
+			res.redirect(`/users/${user.id}`);
 		})
 		.catch(e => res.status(500).send(e.stack));
 });
@@ -54,7 +54,7 @@ router.delete('/:id', (req, res) => {
 		limit: 1
 	})
 		.then(() => {
-			res.redirect('');
+			res.redirect('/users');
 		})
 		.catch(e => res.status(500).send(e.stack));
 });
@@ -76,7 +76,7 @@ router.put('/:id', (req, res) => {
 	)
 		.then(() => {
 			req.method = 'GET';
-			res.redirect(`/${req.params.id}`);
+			res.redirect(`/users/${req.params.id}`);
 		})
 		.catch(e => res.status(500).send(e.stack));
 });
