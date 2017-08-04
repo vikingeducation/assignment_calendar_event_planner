@@ -3,6 +3,7 @@ var router = express.Router();
 var models = require("./../models");
 var User = models.User;
 var Calendar = models.Calendar;
+var Calevent = models.Calevent;
 var sequelize = models.sequelize;
 
 // ----------------------------------------
@@ -23,7 +24,6 @@ var onCalendarIndex = (req, res) => {
     .catch(e => res.status(500).send(e.stack));
 };
 //calendar
-
 router.get("/", onIndex);
 router.get("/users", onIndex);
 //calendar
@@ -39,7 +39,9 @@ router.get("/users/new", (req, res) => {
 router.get("/calendar/new", (req, res) => {
   res.render("calendar/new");
 });
-
+router.get("/calendar/:id/event/new", (req, res) => {
+  res.render("events/new", { calender: req.params.id });
+});
 // ----------------------------------------
 // Edit
 // ----------------------------------------
@@ -56,10 +58,10 @@ router.get("/users/:id/edit", (req, res) => {
 });
 //calendar
 router.get("/calendar/:id/edit", (req, res) => {
-  User.findById(req.params.id)
-    .then(user => {
-      if (user) {
-        res.render("calendar/edit", { user });
+  Calendar.findById(req.params.id)
+    .then(calendar => {
+      if (calendar) {
+        res.render("calendar/edit", { calendar });
       } else {
         res.send(404);
       }
@@ -80,6 +82,7 @@ router.get("/users/:id", (req, res) => {
     })
     .catch(e => res.status(500).send(e.stack));
 });
+
 router.get("/calendar/:id", (req, res) => {
   Calendar.findById(req.params.id)
     .then(calendar => {
@@ -125,6 +128,24 @@ router.post("/calendar", (req, res) => {
     })
     .catch(e => res.status(500).send(e.stack));
 });
+router.post("/calendar/:id", (req, res) => {
+  var body = req.body;
+
+  var eventParams = {
+    name: body.event.name,
+    description: body.event.description,
+    date: body.event.date,
+    start: body.event.start,
+    end: body.event.end,
+    calenderId: body.event.calenderId
+  };
+
+  Calevent.create(eventParams)
+    .then(event => {
+      res.redirect(`/calendar/${event.calendarId}`);
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
 // ----------------------------------------
 // Update
 // ----------------------------------------
@@ -150,12 +171,12 @@ router.put("/users/:id", (req, res) => {
     .catch(e => res.status(500).send(e.stack));
 });
 router.put("/calendar/:id", (req, res) => {
-  var userParams = req.body.user;
+  var calendarParams = req.body.calendar;
 
   Calendar.update(
     {
-      name: userParams.name,
-      userId: userParams.userId
+      name: calendarParams.name,
+      userId: calendarParams.userId
     },
     {
       where: { id: req.params.id },

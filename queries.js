@@ -7,44 +7,35 @@ User.findOne().then(lg);
 User.findById(10).then(lg);
 User.findAll().then(lg);
 
-
 // ----------------------------------------
 // Attributes
 // ----------------------------------------
 
 // Attribute filtering
 User.findAll({
-  attributes: ['fname', 'lname']
+  attributes: ["fname", "lname"]
 }).then(lg);
 
 // Attribute renaming
 User.findAll({
-  attributes: [
-    ['fname', 'firstName'],
-    ['lname', 'lastName']
-  ]
+  attributes: [["fname", "firstName"], ["lname", "lastName"]]
 }).then(lg);
 
 // Attribute aggregation with group
 Post.findAll({
-  attributes: [
-    [sequelize.fn('COUNT', sequelize.col('userId')), 'userCount']
-  ],
+  attributes: [[sequelize.fn("COUNT", sequelize.col("userId")), "userCount"]],
   group: '"userId"'
 }).then(lg);
 
 Post.findAll({
-  attributes: [
-    ['COUNT("userId")', 'userCount']
-  ],
+  attributes: [['COUNT("userId")', "userCount"]],
   group: '"userId"'
 }).then(lg);
 
 // Attribute exclude
 Post.findAll({
-  attributes: { exclude: ['body'] }
+  attributes: { exclude: ["body"] }
 }).then(lg);
-
 
 // ----------------------------------------
 // Where
@@ -56,25 +47,30 @@ Comment.findAll({
 }).then(lg);
 
 // Update
-Comment.update({
-  body: 'Dude! What does mine say?'
-}, {
-  where: { userId: 1 }
-}).then(lg);
+Comment.update(
+  {
+    body: "Dude! What does mine say?"
+  },
+  {
+    where: { userId: 1 }
+  }
+).then(lg);
 
-Comment.update({
-  body: 'Dude! What does mine say?'
-}, {
-  where: { userId: 1 },
-  limit: 1
-}).then(lg);
+Comment.update(
+  {
+    body: "Dude! What does mine say?"
+  },
+  {
+    where: { userId: 1 },
+    limit: 1
+  }
+).then(lg);
 
 // Destroy
 Comment.destroy({
   where: { userId: 1 },
   limit: 1
 }).then(lg);
-
 
 // ----------------------------------------
 // Operators
@@ -83,19 +79,13 @@ Comment.destroy({
 // Logical
 Comment.findAll({
   where: {
-    $and: [
-      { userId: 100 },
-      { postId: 2 }
-    ]
+    $and: [{ userId: 100 }, { postId: 2 }]
   }
 }).then(lg);
 
 Comment.findAll({
   where: {
-    $or: [
-      { userId: 100 },
-      { postId: 2 }
-    ]
+    $or: [{ userId: 100 }, { postId: 2 }]
   }
 }).then(lg);
 
@@ -122,7 +112,7 @@ Comment.findAll({
 User.count({
   where: {
     username: {
-      $like: '%1'
+      $like: "%1"
     }
   }
 }).then(lg);
@@ -131,7 +121,7 @@ User.count({
 User.count({
   where: {
     username: {
-      $notLike: '%1'
+      $notLike: "%1"
     }
   }
 }).then(lg);
@@ -144,7 +134,6 @@ User.count({
     }
   }
 }).then(lg);
-
 
 // ----------------------------------------
 // Pagination/Limiting
@@ -161,32 +150,27 @@ Post.findAll({
   limit: 10
 }).then(lg);
 
-
 // ----------------------------------------
 // Ordering
 // ----------------------------------------
 
 // Ascending
 Post.findAll({
-  attributes: ['title', 'publishedDate'],
-  order: 'publishedDate'
+  attributes: ["title", "publishedDate"],
+  order: "publishedDate"
 }).then(lg);
 
 // Descending
 Post.findAll({
-  attributes: ['publishedDate'],
-  order: '"publishedDate" DESC',
+  attributes: ["publishedDate"],
+  order: '"publishedDate" DESC'
 }).then(lg);
 
 // Multiple
 Comment.findAll({
-  attributes: ['userId', 'postId'],
-  order: [
-    ['userId', 'ASC'],
-    ['postId', 'DESC']
-  ]
+  attributes: ["userId", "postId"],
+  order: [["userId", "ASC"], ["postId", "DESC"]]
 }).then(lg);
-
 
 // ----------------------------------------
 // Aggregation
@@ -200,40 +184,36 @@ Post.count({
 }).then(lg);
 
 // Max
-Post.max('publishedDate').then(lg);
+Post.max("publishedDate").then(lg);
 
 // Min
-Post.min('publishedDate').then(lg);
+Post.min("publishedDate").then(lg);
 
 // Sum
-Post.sum('id').then(lg);
+Post.sum("id").then(lg);
 
 // Aggregate
-Comment.aggregate('"userId"', 'COUNT', {
+Comment.aggregate('"userId"', "COUNT", {
   where: { postId: 1 }
 }).then(lg);
 
 // With findAll
 Post.findAll({
   group: '"userId"',
-  attributes: ['userId', [sequelize.fn('COUNT', sequelize.col('userId')), 'count']]
+  attributes: [
+    "userId",
+    [sequelize.fn("COUNT", sequelize.col("userId")), "count"]
+  ]
 }).then(lg);
 
 Post.findAll({
   group: '"userId"',
-  attributes: ['userId', ['COUNT("userId")', 'count']]
+  attributes: ["userId", ['COUNT("userId")', "count"]]
 }).then(lg);
-
-
-
-
-
-
 
 // ----------------------------------------
 // Ignore below this line, not implemented
 // ----------------------------------------
-
 
 // ----------------------------------------
 // Associations and JOINs
@@ -249,10 +229,6 @@ Post.findAll({
 //   include: [{ model: Comment, attributes: [] }]
 // }).then(lg);
 
-
-
-
-
 // // ----------------------------------------
 // // Custom Methods
 // // ----------------------------------------
@@ -262,26 +238,3 @@ Post.findAll({
 
 // // Instance method
 // User.findById(1).then(u => u.name()).then(lg);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

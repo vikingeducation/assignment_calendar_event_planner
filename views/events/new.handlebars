@@ -1,0 +1,37 @@
+
+
+<header class="page-header">
+  <h1>New Event</h1>
+</header>
+
+
+<form action="/calendar/{{calender}}/event" method="post">
+  <h2>Event Info</h2>
+  <div class="form-group">
+    <label for="event_name">Name</label>
+    <input type="text" class="form-control" name="event[name]" id="event_name" >
+  </div>
+  <div class="form-group">
+    <label for="event_date">Date</label>
+    <input type="text" class="form-control" name="event[date]" id="event_date" >
+  </div>
+  <div class="form-group">
+    <label for="event_start">Starts at</label>
+    <input type="text" class="form-control" name="event[start]" id="event_start" >
+  </div>
+  <div class="form-group">
+    <label for="event_end">Ends at</label>
+    <input type="text" class="form-control" name="event[end]" id="event_end" >
+  </div>
+  <div class="form-group">
+    <label for="event_description">Description</label>
+    <input type="text" class="form-control" name="event[description" id="event_description" >
+  </div>
+  <div class="form-group">
+    <label for="event_calenderId"></label>
+    <h1 type="text" class="form-control" name="event[calenderId]" id="event_calenderId" >{{calender}}</h1>
+  </div>
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary">
+  </div>
+</form>
