@@ -19,6 +19,8 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(methodOverride(getPostSupport.callback, getPostSupport.options));
+
 app.use("/", index);
 
 app.listen(port, () => {
