@@ -28,6 +28,14 @@ app.get("/", (req, res) => {
   res.redirect("/users");
 });
 
+// Redirect Sugar
+express.response.doRedirect = function(path) {
+  let _this = this;
+  return function() {
+    _this.redirect(path);
+  };
+};
+
 // Routes
 const usersRoutes = require("./routers/users");
 app.use("/users", usersRoutes);
