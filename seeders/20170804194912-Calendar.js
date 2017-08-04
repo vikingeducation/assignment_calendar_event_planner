@@ -20,7 +20,7 @@ module.exports = {
         userid: `${i}`
       });
     }
-    return queryInterface.bulkInsert("Calendar", Calendar);
+    return queryInterface.bulkInsert("calendars", calendars);
   },
 
   down: function(queryInterface, Sequelize) {

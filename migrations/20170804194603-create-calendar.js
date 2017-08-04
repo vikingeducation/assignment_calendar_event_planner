@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable("Calendars", {
+    return queryInterface.createTable("calendars", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -27,6 +27,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable("Calendars");
+    return queryInterface.dropTable("calendars");
   }
 };

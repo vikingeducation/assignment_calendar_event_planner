@@ -6,6 +6,8 @@ const getPostSupport = require("express-method-override-get-post-support");
 const morgan = require("morgan");
 const usersRoutes = require("./routers/users");
 const calendarsRoutes = require("./routers/calendars");
+//const eventsRoutes = require("./routers/events");
+//const invitationsRoutes = require("./routers/invitations");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/public`));
@@ -28,8 +30,11 @@ app.use(
   )
 );
 
+//Resource Routers
 app.use("/", usersRoutes);
 app.use("/calendars", calendarsRoutes);
+//app.use("/events", eventsRoutes);
+//app.use("/invitations", invitationsRoutes);
 
 var expressHandlebars = require("express-handlebars");
 

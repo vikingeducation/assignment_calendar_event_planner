@@ -1,14 +1,18 @@
-'use strict';
+"use strict";
 module.exports = function(sequelize, DataTypes) {
-  var Calendar = sequelize.define('Calendar', {
-    name: DataTypes.STRING,
-    userid: DataTypes.INTEGER
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
+  var calendars = sequelize.define(
+    "calendars",
+    {
+      name: DataTypes.STRING,
+      userid: DataTypes.INTEGER
+    },
+    {
+      classMethods: {
+        associate: function(models) {
+          // associations can be defined here
+        }
       }
     }
-  });
-  return Calendar;
+  );
+  return calendars;
 };
