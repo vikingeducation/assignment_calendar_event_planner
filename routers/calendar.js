@@ -2,12 +2,17 @@ const express = require('express');
 const router = express.Router();
 const models = require('./../models');
 const User = models.User;
+const Calendar = models.Calendar;
 const sequelize = models.sequelize;
 
 router.get('/', (req, res) => {
-	User.findAll()
-		.then(users => {
-			res.render('users/index', { title: 'Users', users: users });
+	let CalendarsPromise = Calendar.findAll()
+		.then(results => {
+			res.render('calendars/index', {
+				title: 'Calendars',
+				calendars: results.calendars,
+				user: results.user
+			});
 		})
 		.catch(e => res.status(500).send(e.stack));
 });
@@ -16,30 +21,29 @@ router.post('/', (req, res) => {
 	const body = req.body;
 
 	const userParams = {
-		fname: body.user.fname,
-		lname: body.user.lname,
-		username: body.user.username,
-		email: body.user.email
+		fname: body.calendar.fname,
+		lname: body.calendar.lname,
+		username: body.calendar.username,
+		email: body.calendar.email
 	};
 
-	User.create(userParams)
-		.then(user => {
-			res.redirect(`/${user.id}`);
+	Calendar.create(userParams)
+		.then(calendar => {
+			res.redirect(`/${calendar.id}`);
 		})
 		.catch(e => res.status(500).send(e.stack));
 });
 
 router.get('/new', (req, res) => {
-	res.render('users/new', { title: 'New User' });
+	res.render('calendars/new', { title: 'New Calendar' });
 });
 
 router.get('/:id', (req, res) => {
-	User.findById(req.params.id)
-		.then(user => {
-			if (user) {
-				res.render('users/show', {
-					title: `${user.fname} ${user.lname}`,
-					user: user
+	Calendar.findById(req.params.id)
+		.then(calendar => {
+			if (calendar) {
+				res.render('calendars/show', {
+					title: `${calendar.fname} ${calendar.lname}`
 				});
 			} else {
 				res.send(404);
@@ -49,7 +53,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-	User.destroy({
+	Calendar.destroy({
 		where: { id: req.params.id },
 		limit: 1
 	})
@@ -60,9 +64,9 @@ router.delete('/:id', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-	const userParams = req.body.user;
+	const userParams = req.body.calendar;
 
-	User.update(
+	Calendar.update(
 		{
 			fname: userParams.fname,
 			lname: userParams.lname,
@@ -82,12 +86,12 @@ router.put('/:id', (req, res) => {
 });
 
 router.get('/:id/edit', (req, res) => {
-	User.findById(req.params.id)
-		.then(user => {
-			if (user) {
-				res.render('users/edit', {
-					title: `Edit: ${user.fname} ${user.lname}`,
-					user: user
+	Calendar.findById(req.params.id)
+		.then(calendar => {
+			if (calendar) {
+				res.render('calendars/edit', {
+					title: `Edit: ${calendar.fname} ${calendar.lname}`,
+					calendar: calendar
 				});
 			} else {
 				res.send(404);
