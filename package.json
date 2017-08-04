@@ -4,6 +4,7 @@
   "description": "I'll pencil you in on Tuesday around noonish?",
   "main": "index.js",
   "scripts": {
+    "start": "which nodemon > /dev/null && nodemon app.js || node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all"
   },
