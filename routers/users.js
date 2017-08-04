@@ -14,6 +14,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/users/:id", (req, res) => {
+  console.log(req.body);
   res.end("post request :(");
 });
 
@@ -23,12 +24,29 @@ router.get("/users/:id/edit", (req, res) => {
   });
 });
 
+router.post("/users/:id/edit/put", (req, res) {
+
+})
+
 router.put("/users/:id", (req, res) => {
-  //do stuff with database
-  .then(()=> {
-  req.method = "GET";
-  res.redirect(`/users/${req.params.id}`);
-  })
+  let userInfo = req.body.user;
+  console.log(req.body);
+
+  console.log(userInfo);
+
+  // Users.update({
+  //   firstName: userInfo.firstName,
+  //   lastName: userInfo.lastName,
+  //   username: userInfo.username,
+  //   email: userInfo.email
+  // }, {
+  //     where: { id: req.params.id }
+  // })
+  // .then(()=> {
+  //   req.method = "GET";
+  //   res.redirect(`/users/${req.params.id}`);
+  // })
+  res.end("hello sir");
 });
 
 module.exports = router;
