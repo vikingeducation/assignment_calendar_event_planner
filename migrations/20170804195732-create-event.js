@@ -37,6 +37,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable("CreateEvents");
+    return queryInterface.dropTable("CalendarEvents");
   }
 };

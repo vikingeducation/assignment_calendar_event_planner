@@ -3,6 +3,7 @@ const router = express.Router();
 const models = require("./../models");
 const User = models.User;
 const Calendar = models.Calendar;
+const CalendarEvent = models.CalendarEvent;
 const sequelize = models.sequelize;
 
 router.get("/", (req, res) => {
@@ -57,14 +58,19 @@ router.get("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  Calendar.destroy({
-    where: { id: req.params.id },
-    limit: 1
-  })
-    .then(() => {
-      res.redirect("/calendars");
-    })
+  destroyEvents()
+    .then(destroyCalendar)
+    .then(res.doRedirect("/calendars"))
     .catch(e => res.status(500).send(e.stack));
+
+  function destroyEvents() {
+    return CalendarEvent.destroy({
+      where: { calendarId: req.params.id }
+    });
+  }
+  function destroyCalendar() {
+    return Calendar.destroy({ where: { id: req.params.id }, limit: 1 });
+  }
 });
 
 router.put("/:id", (req, res) => {
