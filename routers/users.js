@@ -14,7 +14,36 @@ router.get("/", grabUsers);
 router.get("/users", grabUsers);
 
 //create new user
-router.get("/users/new", (req, res) => {});
+router.get("/users/new", (req, res) => {
+  res.render("users/new");
+});
+
+router.get('/users/:id', (req, res)=> {
+  let id = req.params.id;
+  users.findById(id).then((user)=> {
+    res.render('/users/show', {user})
+  })
+})
+
+router.get('/users/:id/edit', (req, res)=> {
+  let id = req.params.id;
+  users.update()
+})
+
+router.post("/users", (req, res)=> {
+  let params = {
+    fname = req.body.user.fname,
+    lname = req.body.user.lname,
+    email = req.body.user.email,
+    username = req.body.user.username
+  };
+  users.create(params).then(
+    (user)=> {
+      res.redirect(`/users/${ user.id}`)
+
+  })
+  .catch((e) => res.status(500).send(e.stack));
+});
 // //create new user
 // router.get('/users/new', (req, res) => {
 //

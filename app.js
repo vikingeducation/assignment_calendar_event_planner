@@ -42,7 +42,7 @@ app.engine("handlebars", hbs.engine); //hbs.engine ??
 app.set("view engine", "handlebars");
 
 var port = process.env.PORT || process.argv[2] || 3000;
-var host = "localhost";
+var host = "0.0.0.0";
 
 var args;
 process.env.NODE_ENV === "production" ? (args = [port]) : (args = [port, host]);
