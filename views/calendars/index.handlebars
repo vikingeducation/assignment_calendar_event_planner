@@ -1,0 +1,39 @@
+<header class="page-header">
+  <h1>Calendars</h1>
+  <a href="/calendars/new" class="btn btn-primary">+New Calendars</a>
+</header>
+{{#if calendars.length }}
+  <div class='panel panel-default'>
+    <div class='panel-body'>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Calendars</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each calendars as |calendar| }}
+          <tr>
+            <td>
+              <a href="/calendars/{{ calendar.id }}">{{ calendar.name }}</a>
+            </td>
+            <td>
+              <a href="/calendars/{{ calendar.id }}">{{ calendar.id }}</a>
+            </td>
+            <td>
+              <a href="/calendars/{{ calendar.id }}/edit">Edit</a>
+            </td>
+            <td>
+              <a href="/calendars/{{ calendar.id }}?_method=delete" class="text-danger">Delete</a>
+            </td>
+          </tr>
+          {{/each }}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {{else }}
+    <p class="text-danger">No calendars</p>
+  {{/if }}
