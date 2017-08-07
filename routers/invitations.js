@@ -16,4 +16,36 @@ router.get("/", (req, res) => {
     .catch(e => res.status(500).send(e.stack));
 });
 
+router.post("/", (req, res) => {
+  const body = req.body;
+
+  const invitationParams = {
+    eventId: body.invitation.eventId,
+    userId: body.invitation.userId
+  };
+
+  Invitation.create(invitationParams)
+    .then(invitation => {
+      res.redirect(`/invitations`);
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+router.get("/new", (req, res) => {
+  let users;
+  User.findAll()
+    .then(result => {
+      users = result;
+      return CalendarEvent.findAll();
+    })
+    .then(events => {
+      res.render("invitations/new", {
+        title: "New Invitation",
+        users: users,
+        events: events
+      });
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
 module.exports = router;
