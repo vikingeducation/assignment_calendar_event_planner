@@ -11,6 +11,7 @@
       <th>Event Name</th>
       <th>Username</th>
       <th>Email</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +25,9 @@
       </td>
       <td>
         {{ invitation.User.email }}
+      </td>
+      <td>
+        <a href="/invitations/{{ invitation.id }}?_method=delete" class="text-danger">Delete</a>
       </td>
     </tr>
     {{/each }}

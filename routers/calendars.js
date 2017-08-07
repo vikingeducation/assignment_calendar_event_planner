@@ -34,7 +34,6 @@ router.post("/", (req, res) => {
 
 router.get("/new", (req, res) => {
   User.findAll().then(users => {
-    console.log(users);
     res.render("calendars/new", {
       title: "New Calendar",
       users: users

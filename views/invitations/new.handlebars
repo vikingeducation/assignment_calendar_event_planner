@@ -1,0 +1,32 @@
+<header class="page-header">
+  <h1>New Invitation</h1>
+</header>
+
+
+<form action="/invitations" method="post">
+  <h2>Invitation Info</h2>
+  <div class="form-group">
+    <label for="calendar_name">Event Name</label>
+    <select class="form-control" name="invitation[eventId]" id="invitation_eventId">
+      {{#each events as |event| }}
+        <option value="{{event.id}}">
+          {{event.name}}
+        </option>
+      {{/each }}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="invitation_userId">User</label>
+    <select class="form-control" name="invitation[userId]" id="invitation_userId">
+      {{#each users as |user| }}
+        <option value="{{user.id}}">
+          {{user.username}}
+        </option>
+      {{/each }}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary">
+  </div>
+</form>

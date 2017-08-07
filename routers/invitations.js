@@ -6,7 +6,7 @@ const Invitation = models.Invitation;
 const sequelize = models.sequelize;
 
 router.get("/", (req, res) => {
-  Invitation.findAll({ include: [{ all: true }] })
+  Invitation.findAll({ attributes: ["id"], include: [{ all: true }] })
     .then(invitations => {
       res.render("invitations/index", {
         title: "Invitations",
@@ -45,6 +45,15 @@ router.get("/new", (req, res) => {
         events: events
       });
     })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+router.delete("/:id", (req, res) => {
+  Invitation.destroy({
+    where: { id: req.params.id },
+    limit: 1
+  })
+    .then(() => res.redirect("/invitations"))
     .catch(e => res.status(500).send(e.stack));
 });
 
