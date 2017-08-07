@@ -9,9 +9,8 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   CalendarEvent.associate = function(models) {
-    CalendarEvent.belongsTo(models.Calendar, {
-      foreignKey: "calendarId"
-    });
+    CalendarEvent.belongsTo(models.Calendar, { foreignKey: "calendarId" });
+    CalendarEvent.hasMany(models.Invitation, { foreignKey: "eventId" });
     CalendarEvent.belongsToMany(models.User, {
       through: "Invitation",
       foreignKey: "eventId"

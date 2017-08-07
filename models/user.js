@@ -8,9 +8,8 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   User.associate = function(models) {
-    User.hasMany(models.Calendar, {
-      foreignKey: "userId"
-    });
+    User.hasMany(models.Calendar, { foreignKey: "userId" });
+    User.hasMany(models.Invitation, { foreignKey: "userId" });
     User.belongsToMany(models.CalendarEvent, {
       through: "Invitation",
       foreignKey: "userId"
