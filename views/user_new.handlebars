@@ -1,0 +1,22 @@
+
+<header><h1>Create A New User!</h1>
+</header>
+<form action="/users/create" method="post">
+  <div class="form-group">
+    <label>First Name</label>
+    <input type="text" class="form-control" name="user[firstName]">
+  </div>
+  <div class="form-group">
+    <label>Last Name</label>
+    <input type="text" class="form-control" name="user[lastName]">
+  </div>
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" class="form-control" name="user[username]">
+  </div>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="text" class="form-control" name="user[email]">
+  </div>
+  <button type="submit" class="btn btn-default">Create!</button>
+</form>
