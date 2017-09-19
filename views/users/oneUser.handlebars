@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <h3>User: {{user.fname}} {{user.lname}}</h3>
+  </div>
+  <div class="row">
+    <a href="/user/edit/{{user.id}}" class="btn btn-warning">Edit</a>
+    <a href="/user/delete/{{user.id}}?_method=delete" class="btn btn-danger">Delete</a>
+  </div>
+  <div class="row">
+    <table class="table-bordered table-hover">
+    <tr>
+      <td> First Name</td>
+    <td>  {{user.fname}} </td>
+  </tr>
+  <tr>
+    <td> Last Name</td>
+    <td> {{user.lname}} </td>
+  </tr>
+  <tr>
+    <td> Username</td>
+    <td>{{user.username}}</td>
+  </tr>
+  <tr>
+    <td> Email</td>
+    <td>{{user.email}} </td>
+  </tr>
+  </table>
+  </div>
+</div>
