@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <h3>New Calendar</h3>
+  </div>
+  <div class="row">
+    <form action="/calendar/new" method="post">
+      <p>Calendar Name: <input name="name" type="text"></p>
+      <div class="form-group">
+        <label for="userSelect">Select user:</label>
+        <select class="form-control" id="userSelect" name="userSelect">
+          {{#each users as |user|}}
+          <option value="{{user.id}}">{{user.username}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <button type="submit" class="btn">Create User</button>
+    </form>
+  </div>
+</div>

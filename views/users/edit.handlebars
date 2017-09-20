@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <h3>Edit User: {{user.fname}} {{user.lname}}</h3>
+  </div>
+  <div class="row">
+    <form action="/user/edit/{{user.id}}" method="post">
+      <input type="hidden" name="_method" value="PUT">
+      <p>First Name <input value="{{user.fname}}" name="user[fname]" type="text"></p>
+      <p>Last Name <input value="{{user.lname}}" name="user[lname]" type="text"></p>
+      <p>Username <input value="{{user.username}}" name="user[username]" type="text"></p>
+      <p>Email <input value="{{user.email}}" name="user[email]" type="text"></p>
+      <button type="submit" class="btn">Update User</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <h3>New Invitation</h3>
+  </div>
+  <div class="row">
+    <form action="/invitations/new" method="post">
+      <div class="form-group">
+        <label for="eventId">Select Event:</label>
+        <select class="form-control" id="eventId" name="eventId">
+          {{#each events as |event|}}
+          <option value="{{event.id}}">{{event.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="userId">Select User:</label>
+        <select class="form-control" id="userId" name="userId">
+          {{#each users as |user|}}
+          <option value="{{user.id}}">{{user.username}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <button type="submit" class="btn">Create Invitation</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <h3>New Event</h3>
+  </div>
+  <div class="row">
+    <form action="/event/new" method="post">
+      <p>Name: <input name="name" type="text"></p>
+      <p>Date: <input name="date" type="date"></p>
+      <p>Start Time: <input name="startTime" type="time" step="1"></p>
+      <p>End Time: <input name="endTime" type="time" step="1"></p>
+      <div class="form-group">
+        <label for="userSelect">Select Calendar:</label>
+        <select class="form-control" id="calendarId" name="calendarId">
+          {{#each calendars as |cal|}}
+          <option value="{{cal.id}}">{{cal.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <p>Description: <textarea rows="4" cols="30" name="description"></textarea></p>
+      <button type="submit" class="btn">Create Event</button>
+    </form>
+  </div>
+</div>

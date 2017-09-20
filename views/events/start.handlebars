@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <h3>Events Index</h3>
+  </div>
+  <div class="row">
+    <a href="/event/new" class="btn btn-primary">+ New Event</a>
+  </div>
+  <div class="row">
+    <table class="table-bordered table-hover">
+      <tr>
+        <th>Event Name</th>
+        <th>Date </th>
+        <th>Start Time </th>
+        <th>End Time </th>
+        <th>Calendar Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Edit </th>
+        <th> Delete </th>
+      </tr>
+    {{#if events.length }}
+    {{#each events as |event|}}
+      <tr>
+
+        <td> <a href="/event/{{event.id}}"> {{event.name}} </a></td>
+        <td> <a href="/event/{{event.id}}"> {{event.date}} </a></td>
+        <td> <a href="/event/{{event.id}}"> {{event.startTime}} </a></td>
+        <td> <a href="/event/{{event.id}}"> {{event.endTime}} </a></td>
+        <td> <a href="/calendar/{{event.CalendarTable.id}}"> {{event.CalendarTable.name}} </a></td>
+        <td> <a href="/user/{{event.CalendarTable.UserTable.id}}">{{event.CalendarTable.UserTable.username}} </a></td>
+        <td> <a href="/user/{{event.CalendarTable.UserTable.id}}">{{event.CalendarTable.UserTable.email}} </a></td>
+        <td> <a href="/event/edit/{{event.id}}" class="text-warning">Edit</a></td>
+        <td> <a href="/event/delete/{{event.id}}?_method=delete" class="text-danger">Delete</a> </td>
+      </tr>
+      {{/each}}
+    {{else}}
+    <p> No Data</p>
+    {{/if}}
+  </table>
+  </div>
+</div>

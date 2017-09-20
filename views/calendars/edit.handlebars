@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <h3>Edit Calendar: {{calendar.name}}</h3>
+  </div>
+  <div class="row">
+    <form action="/calendar/edit/{{calendar.id}}" method="post">
+      <input type="hidden" name="_method" value="PUT">
+      <input type="hidden" name="userId" value="{{calendar.userId}}"
+      <p>Name <input value="{{calendar.name}}" name="name" type="text"></p>
+      <button type="submit" class="btn">Update Calendar</button>
+    </form>
+  </div>
+</div>
