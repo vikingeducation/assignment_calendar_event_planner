@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <h3>Invitations Index</h3>
+  </div>
+  <div class="row">
+    <a href="/invitations/new" class="btn btn-primary">+ New Invitation</a>
+  </div>
+  <div class="row">
+    <table class="table-bordered table-hover">
+      <tr>
+        <th>Event Name</th>
+        <th>Username </th>
+        <th> Email </th>
+        <th> Delete </th>
+      </tr>
+    {{#if invitations.length }}
+    {{#each invitations as |invit|}}
+      <tr>
+
+        <td> <a href="/event/{{invit.EventTable.id}}"> {{invit.EventTable.name}} </a></td>
+        <td> <a href="/user/{{invit.UserTable.id}}">{{invit.UserTable.username}} </a></td>
+        <td> <a href="/user/{{invit.UserTable.id}}">{{invit.UserTable.email}} </a></td>
+        <td> <a href="/invitations/delete/{{invit.id}}?_method=delete" class="text-danger">Delete</a> </td>
+      </tr>
+      {{/each}}
+    {{else}}
+    <p> No Data</p>
+    {{/if}}
+  </table>
+  </div>
+</div>

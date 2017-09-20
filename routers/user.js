@@ -4,6 +4,7 @@ var models = require("./../models");
 var UserTable = models.UserTables;
 var CalendarTable = models.CalendarTables;
 var EventTable = models.EventTables;
+var Invitations = models.Invitation;
 var sequelize = models.sequelize;
 //––––––––––––––––––––––––––––––––––––
 //–––––Users–––––
@@ -290,6 +291,55 @@ var onDeleteEvent = (req, res) => {
 };
 
 //––––––––––––––––––––––––––––––––––––
+//–––––Invitations–––––
+//––––––––––––––––––––––––––––––––––––
+
+var onIndexInvitation = (req, res) => {
+  Invitations.findAll({
+    include: [EventTable, UserTable]
+  })
+    .then(invitations => {
+      res.render("invitations/start", { invitations });
+    })
+    .catch(e => res.status(500).send(e.stack));
+};
+
+var onNewInvitation = (req, res) => {
+  Promise.all([EventTable.findAll(), UserTable.findAll()])
+    .then(values => {
+      var events = values[0];
+      var users = values[1];
+      res.render("invitations/newInvit", { users, events });
+    })
+    .catch(e => res.status(500).send(e.stack));
+};
+
+var onPostInvitation = (req, res) => {
+  var body = req.body;
+  var createParams = {
+    eventId: body.eventId,
+    userId: body.userId
+  };
+  Invitations.create(createParams)
+    .then(invit => {
+      res.redirect(`/invitations`);
+    })
+    .catch(e => res.status(500).send(e.stack));
+};
+
+var onDeleteInvitation = (req, res) => {
+  Invitations.destroy({
+    where: { id: req.params.id },
+    limit: 1
+  })
+    .then(() => {
+      req.method = "GET";
+      res.redirect("/invitations");
+    })
+    .catch(e => res.status(500).send(e.stack));
+};
+
+//––––––––––––––––––––––––––––––––––––
 //–––––Router–––––
 //––––––––––––––––––––––––––––––––––––
 
@@ -335,5 +385,13 @@ router.get("/event/edit/:id", editEvent);
 router.put("/event/edit/:id", onUpdateEvent);
 
 router.delete("/event/delete/:id", onDeleteEvent);
+
+router.get("/invitations", onIndexInvitation);
+
+router.get("/invitations/new", onNewInvitation);
+
+router.post("/invitations/new", onPostInvitation);
+
+router.delete("/invitations/delete/:id", onDeleteInvitation);
 
 module.exports = router;
