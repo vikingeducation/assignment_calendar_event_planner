@@ -11,16 +11,16 @@
         <th> Email </th>
       </tr>
     {{#if users.length }}
-    {{#each users as |user|}}
-    <tr>
-    <td> <a href="/user/{{user.id}}"> {{user.fname}} </a></td>
-    <td> <a href="/user/{{user.id}}">{{user.lname}} </a></td>
-    <td> <a href="/user/{{user.id}}">{{user.username}} </a></td>
-    <td> <a href="/user/{{user.id}}">{{user.email}} </a></td>
-    <td> <a href="/user/edit/{{user.id}}" class="text-warning">Edit</a></td>
-    <td> <a href="/user/delete/{{user.id}}?_method=delete" class="text-danger">Delete</a> </td>
-  </tr>
-    {{/each}}
+      {{#each users as |user|}}
+      <tr>
+      <td> <a href="/user/{{user.id}}"> {{user.fname}} </a></td>
+      <td> <a href="/user/{{user.id}}">{{user.lname}} </a></td>
+      <td> <a href="/user/{{user.id}}">{{user.username}} </a></td>
+      <td> <a href="/user/{{user.id}}">{{user.email}} </a></td>
+      <td> <a href="/user/edit/{{user.id}}" class="text-warning">Edit</a></td>
+      <td> <a href="/user/delete/{{user.id}}?_method=delete" class="text-danger">Delete</a> </td>
+    </tr>
+      {{/each}}
     {{else}}
     <p> No Data</p>
     {{/if}}

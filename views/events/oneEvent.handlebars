@@ -1,0 +1,46 @@
+<div class="container">
+  {{#each events as |event|}}
+  <div class="row">
+    <h3>Event: {{event.name}}</h3>
+  </div>
+  <div class="row">
+    <a href="/event/edit/{{event.id}}" class="btn btn-warning">Edit</a>
+    <a href="/event/delete/{{event.id}}?_method=delete" class="btn btn-danger">Delete</a>
+  </div>
+  <div class="row">
+    <p>{{event.description}}</p>
+  </div>
+  <div class="row">
+    <table class="table-bordered table-hover">
+      <tr>
+        <td> Event Name: </td>
+        <td>  {{event.name}} </td>
+      </tr>
+      <tr>
+        <td> Date: </td>
+        <td> {{event.date}} </td>
+      </tr>
+      <tr>
+        <td> Start Time: </td>
+        <td> {{event.startTime}} </td>
+      </tr>
+      <tr>
+        <td> End Time: </td>
+        <td> {{event.endTime}} </td>
+      </tr>
+      <tr>
+        <td> Calendar Name: </td>
+        <td> {{event.CalendarTable.name}} </td>
+      </tr>
+      <tr>
+        <td> Username: </td>
+        <td> {{event.CalendarTable.UserTable.username}} </td>
+      </tr>
+      <tr>
+        <td> Email: </td>
+        <td> {{event.CalendarTable.UserTable.email}} </td>
+      </tr>
+    </table>
+  </div>
+  {{/each}}
+</div>

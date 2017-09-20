@@ -49,6 +49,14 @@ var hbs = expressHandlebars.create({
   defaultLayout: "application"
 });
 
+// app.engine("handlebars", expressHandlebars({
+//   defaultLayout: "application",
+//   extname: ".handlebars",
+//   helpers: require("./public/js/helpers.js").helpers, // same file that gets used on our client
+//   partialsDir: "views/", // same as default, I just like to be explicit
+//   layoutsDir: "views/layouts/" // same as default, I just like to be explicit
+// }));
+
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
