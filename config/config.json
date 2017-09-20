@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "anapaulac",
+    "password": null,
+    "database": "calander_event_planner_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "anapaulac",
+    "password": null,
+    "database": "calander_event_planner_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "assignment_calendar_event_planner",
+  "version": "1.0.0",
+  "description": "I'll pencil you in on Tuesday around noonish?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "npm run sql db:migrate:undo:all && npm run sql db:migrate && npm run sql db:seed:all",
+    "seeds": "npm run sql db:migrate:undo:all && npm run sql db:migrate && npm run sql db:seed:all",
+    "sql": "node_modules/sequelize-cli/bin/sequelize"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdTriplett/assignment_calendar_event_planner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EdTriplett/assignment_calendar_event_planner/issues"
+  },
+  "homepage": "https://github.com/EdTriplett/assignment_calendar_event_planner#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "express-method-override-get-post-support": "0.0.7",
+    "g": "^2.0.1",
+    "method-override": "^2.3.9",
+    "morgan": "^1.8.2",
+    "morgan-toolkit": "^1.0.2",
+    "pg": "^7.1.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.4.2"
+  }
+}
