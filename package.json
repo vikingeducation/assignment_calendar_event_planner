@@ -4,7 +4,9 @@
   "description": "I'll pencil you in on Tuesday around noonish?",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+    "console": "node repl.js"
   },
   "repository": {
     "type": "git",
