@@ -36,12 +36,8 @@ app.use(morganToolkit());
 // ----------------------------------------
 // Routes
 // ----------------------------------------
-// var usersRoutes = require('./routers/users');
-// app.use('/', usersRoutes);
-
-app.use('/', function(req, res) {
-  res.send('Hello World!');
-});
+var usersRoutes = require('./routers/users');
+app.use('/', usersRoutes);
 
 // ----------------------------------------
 // Template Engine
