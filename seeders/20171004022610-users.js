@@ -4,7 +4,7 @@ var models = require('./../models');
 module.exports = {
   up: (queryInterface, Sequelize) => {
     var users = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 1; i < 11; i++) {
       users.push({
         fname: `Foo${i}`,
         lname: `Bar${i}`,
