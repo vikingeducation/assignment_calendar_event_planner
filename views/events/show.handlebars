@@ -1,0 +1,14 @@
+<header class="page-header">
+  <h1>Event: {{ event.name }}</h1>
+  <a href="/events/{{ event.id }}/edit" class="btn btn-primary">Edit</a>
+  <a href="/events/{{ event.id }}?_method=delete" class="btn btn-danger">Delete</a>
+</header>
+
+<p>Description: {{ event.description }}</p>
+<p>Event Name: {{ event.name }}</p>
+<p>Date: {{ event.date }}</p>
+<p>Start Time: {{ event.start_time }}</p>
+<p>End Time: {{ event.end_time }}</p>
+<p>Calendar Name: {{ event.calendarName }}</p>
+<p>Username: {{ event.username }}</p>
+<p>Email: {{ event.email }}</p>
