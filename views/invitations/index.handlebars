@@ -1,0 +1,36 @@
+
+
+<header class="page-header">
+  <h1>Invitations</h1>
+  <a href="/invitations/new" class="btn btn-primary">+ New Invitation</a>
+</header>
+
+
+{{#if invitations.length }}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Event Name</th>
+        <th>Username</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each invitations as |invitation| }}
+      <tr>
+        <td>
+          <a href="/events/{{ invitation.eventId }}">{{ invitation.eventName }}</a>
+        </td>
+        <td>
+          <a href="/users/{{ invitation.userId }}">{{ invitation.username }}</a>
+        </td>
+        <td>
+          <a href="/users/{{ invitation.userId }}">{{ invitation.email }}</a>
+        </td>
+      </tr>
+      {{/each }}
+    </tbody>
+  </table>
+{{else }}
+  <p class="text-danger">No Invitations</p>
+{{/if }}
