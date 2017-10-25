@@ -5,32 +5,30 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"seed":
-			"sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-		"seeds":
-			"sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+		"seed": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+		"seeds": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
 		"console": "node repl.js",
 		"c": "node repl.js"
 	},
 	"repository": {
 		"type": "git",
-		"url":
-			"git+https://github.com/coelacanth7/assignment_calendar_event_planner.git"
+		"url": "git+https://github.com/coelacanth7/assignment_calendar_event_planner.git"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url":
-			"https://github.com/coelacanth7/assignment_calendar_event_planner/issues"
+		"url": "https://github.com/coelacanth7/assignment_calendar_event_planner/issues"
 	},
-	"homepage":
-		"https://github.com/coelacanth7/assignment_calendar_event_planner#readme",
+	"homepage": "https://github.com/coelacanth7/assignment_calendar_event_planner#readme",
 	"dependencies": {
 		"body-parser": "^1.18.2",
 		"express": "^4.16.2",
 		"express-handlebars": "^3.0.0",
+		"express-method-override-get-post-support": "0.0.7",
+		"method-override": "^2.3.10",
 		"morgan": "^1.9.0",
+		"morgan-toolkit": "^1.0.2",
 		"pg": "^7.3.0",
 		"pg-hstore": "^2.3.2",
 		"sequelize": "^4.17.2",
