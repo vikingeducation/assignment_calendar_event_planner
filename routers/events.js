@@ -44,7 +44,7 @@ router.get("/events/new", (req, res) => {
 	Calendar.findAll()
 		.then(calendars => {
 			res.render("events/new", { calendars });
-			console.log("calendars:", JSON.stringify(calendars, null, 2));
+			// console.log("calendars:", JSON.stringify(calendars, null, 2));
 		})
 		.catch(e => res.status(500).send(e.stack));
 });
@@ -95,12 +95,50 @@ router.get("/events/:id/edit", (req, res) => {
 		.then(_event => {
 			if (_event) {
 				res.render("events/edit", { _event });
-				console.log("_event:", JSON.stringify(_event, null, 2));
+				// console.log("_event:", JSON.stringify(_event, null, 2));
 			} else {
 				res.send(404);
 			}
 		})
 		.catch(e => res.status(500).send(e.stack));
+});
+
+// create new event
+
+router.post("/event", (req, res) => {
+	var body = req.body;
+
+	// console.log("req.body:", req.body);
+	//search db.Calendar for calendar,
+	//and get id to associate with event
+	Calendar.findAll({
+		where: { id: body.event.calendar }
+	}).then(calendar => {
+		if (calendar) {
+			// console.log("CALENDAR", calendar);
+
+			var eventParams = {
+				name: body.event.name,
+				description: body.event.description,
+				date: body.event.date,
+				start_time: body.event.start_time,
+				end_time: body.event.end_time,
+				calendar_id: body.event.calendar
+			};
+
+			console.log("eventParams", JSON.stringify(eventParams, null, 2));
+
+			_Event
+				.create(eventParams)
+				.then(event => {
+					req.method = "GET";
+					res.redirect(`/events/${event.id}`);
+				})
+				.catch(e => res.status(500).send(e.stack));
+		} else {
+			res.status(404);
+		}
+	});
 });
 
 // exports

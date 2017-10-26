@@ -100,6 +100,7 @@ router.post("/calendars", (req, res) => {
 
 			Calendar.create(calendarParams)
 				.then(calendar => {
+					req.method = "GET";
 					res.redirect(`/calendars/${calendar.id}`);
 				})
 				.catch(e => res.status(500).send(e.stack));

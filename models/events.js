@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
 			name: DataTypes.STRING,
 			description: DataTypes.STRING,
 			date: DataTypes.DATE,
-			start_time: DataTypes.DATE,
-			end_time: DataTypes.DATE,
+			start_time: DataTypes.TIME,
+			end_time: DataTypes.TIME,
 			calender_id: DataTypes.INTEGER
 		},
 		{
