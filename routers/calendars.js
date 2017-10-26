@@ -36,22 +36,52 @@ router.get("/calendars/new", (req, res) => {
 	res.render("calendars/new");
 });
 
+//Show a calendar
+router.get("/calendars/:id", (req, res) => {
+	Calendar.findById(req.params.id, {
+		include: [
+			{
+				model: User
+			}
+		]
+	})
+		.then(calendar => {
+			if (calendar) {
+				console.log("CALENDER:", JSON.stringify(calendar, null, 2));
+				res.render("calendars/show", { calendar });
+			} else {
+				res.send(404);
+			}
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
 // create new calendar
 router.post("/calendars", (req, res) => {
 	var body = req.body;
 
-	var userParams = {
-		fname: body.user.fname,
-		lname: body.user.lname,
-		username: body.user.username,
-		email: body.user.email
-	};
+	//search db.User for username,
+	//and get id to associate with calendar
+	User.findAll({
+		where: { username: body.calendar.username }
+	}).then(user => {
+		if (user) {
+			console.log("USER", user);
 
-	User.create(userParams)
-		.then(user => {
-			res.redirect(`/users/${user.id}`);
-		})
-		.catch(e => res.status(500).send(e.stack));
+			var calendarParams = {
+				name: body.calendar.name,
+				userId: user[0].dataValues.id
+			};
+
+			Calendar.create(calendarParams)
+				.then(calender => {
+					res.redirect(`/calendars/${calender.id}`);
+				})
+				.catch(e => res.status(500).send(e.stack));
+		} else {
+			res.status(404).send(e.stack);
+		}
+	});
 });
 
 // exports
