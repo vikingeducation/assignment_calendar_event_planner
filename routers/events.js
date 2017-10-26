@@ -49,7 +49,7 @@ router.get("/events/new", (req, res) => {
 		.catch(e => res.status(500).send(e.stack));
 });
 
-//Show a calendar
+//Show an event
 
 router.get("/events/:id", (req, res) => {
 	_Event
@@ -69,6 +69,33 @@ router.get("/events/:id", (req, res) => {
 			if (_event) {
 				// console.log("_event:", JSON.stringify(_event, null, 2));
 				res.render("events/show", { _event });
+			} else {
+				res.send(404);
+			}
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
+//edit form show
+
+router.get("/events/:id/edit", (req, res) => {
+	_Event
+		.findById(req.params.id, {
+			include: [
+				{
+					model: Calendar,
+					include: [
+						{
+							model: User
+						}
+					]
+				}
+			]
+		})
+		.then(_event => {
+			if (_event) {
+				res.render("events/edit", { _event });
+				console.log("_event:", JSON.stringify(_event, null, 2));
 			} else {
 				res.send(404);
 			}
