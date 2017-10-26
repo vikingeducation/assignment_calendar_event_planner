@@ -130,5 +130,18 @@ router.put("/calendars/:id", (req, res) => {
 		.catch(e => res.status(500).send(e.stack));
 });
 
+// destroy a calendar
+router.delete("/calendars/:id", (req, res) => {
+	Calendar.destroy({
+		where: { id: req.params.id },
+		limit: 1
+	})
+		.then(() => {
+			req.method = "GET";
+			res.redirect("/calendars");
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
 // exports
 module.exports = router;
