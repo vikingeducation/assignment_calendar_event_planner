@@ -23,8 +23,10 @@ app.use(morganToolkit());
 // Routes
 var usersRoutes = require("./routers/users");
 var calendarRoutes = require("./routers/calendars");
+var eventRoutes = require("./routers/events");
 app.use("/", usersRoutes);
 app.use("/", calendarRoutes);
+app.use("/", eventRoutes);
 
 // Template Engine
 var expressHandlebars = require("express-handlebars");
