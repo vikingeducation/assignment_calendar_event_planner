@@ -37,5 +37,16 @@ var onIndex = (req, res) => {
 
 router.get("/events", onIndex);
 
+//get new event form
+
+router.get("/events/new", (req, res) => {
+	Calendar.findAll()
+		.then(calendars => {
+			res.render("events/new", { calendars });
+			console.log("calendars:", JSON.stringify(calendars, null, 2));
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
 // exports
 module.exports = router;
