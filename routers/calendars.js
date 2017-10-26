@@ -13,6 +13,7 @@ Calendar.belongsTo(User, { foreignKey: "userId" });
 // users and calendars in one query
 // https://stackoverflow.com/questions/20460270/how-to-make-join-querys-using-sequelize-in-nodejs
 // https://lorenstewart.me/2016/09/12/sequelize-table-associations-joins/
+
 var onIndex = (req, res) => {
 	Calendar.findAll({
 		include: [
@@ -23,20 +24,23 @@ var onIndex = (req, res) => {
 	})
 		.then(calendars => {
 			res.render("calendars/index", { calendars });
-			// console.log("CALENDERS:", JSON.stringify(calendars, null, 2));
+			// console.log("CALENDARS:", JSON.stringify(calendars, null, 2));
 		})
 		.catch(e => res.status(500).send(e.stack));
 };
 
 //Get Calendar index
+
 router.get("/calendars", onIndex);
 
 //get new calendar form
+
 router.get("/calendars/new", (req, res) => {
 	res.render("calendars/new");
 });
 
 //Show a calendar
+
 router.get("/calendars/:id", (req, res) => {
 	Calendar.findById(req.params.id, {
 		include: [
@@ -47,7 +51,7 @@ router.get("/calendars/:id", (req, res) => {
 	})
 		.then(calendar => {
 			if (calendar) {
-				console.log("CALENDER:", JSON.stringify(calendar, null, 2));
+				// console.log("calendar:", JSON.stringify(calendar, null, 2));
 				res.render("calendars/show", { calendar });
 			} else {
 				res.send(404);
@@ -56,7 +60,28 @@ router.get("/calendars/:id", (req, res) => {
 		.catch(e => res.status(500).send(e.stack));
 });
 
+//edit form show
+
+router.get("/calendars/:id/edit", (req, res) => {
+	Calendar.findById(req.params.id, {
+		include: [
+			{
+				model: User
+			}
+		]
+	})
+		.then(calendar => {
+			if (calendar) {
+				res.render("calendars/edit", { calendar });
+			} else {
+				res.send(404);
+			}
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
 // create new calendar
+
 router.post("/calendars", (req, res) => {
 	var body = req.body;
 
@@ -66,7 +91,7 @@ router.post("/calendars", (req, res) => {
 		where: { username: body.calendar.username }
 	}).then(user => {
 		if (user) {
-			console.log("USER", user);
+			// console.log("USER", user);
 
 			var calendarParams = {
 				name: body.calendar.name,
@@ -74,14 +99,35 @@ router.post("/calendars", (req, res) => {
 			};
 
 			Calendar.create(calendarParams)
-				.then(calender => {
-					res.redirect(`/calendars/${calender.id}`);
+				.then(calendar => {
+					res.redirect(`/calendars/${calendar.id}`);
 				})
 				.catch(e => res.status(500).send(e.stack));
 		} else {
 			res.status(404).send(e.stack);
 		}
 	});
+});
+
+// update a calendar with put
+
+router.put("/calendars/:id", (req, res) => {
+	var calendarParams = req.body.calendar;
+
+	Calendar.update(
+		{
+			name: calendarParams.name
+		},
+		{
+			where: { id: req.params.id },
+			limit: 1
+		}
+	)
+		.then(() => {
+			req.method = "GET";
+			res.redirect(`/calendars/${req.params.id}`);
+		})
+		.catch(e => res.status(500).send(e.stack));
 });
 
 // exports

@@ -14,12 +14,14 @@ module.exports = {
       }], {});
     */
 		var calendars = [];
-		for (let i = 0; i < 10; i++) {
+
+		for (let i = 1; i < 10; i++) {
 			calendars.push({
 				name: `calendar ${i}`,
 				userId: i
 			});
 		}
+
 		return queryInterface.bulkInsert("Calendars", calendars);
 	},
 
