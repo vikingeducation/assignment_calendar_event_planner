@@ -12,6 +12,7 @@ var onIndex = (req, res) => {
 		})
 		.catch(e => res.status(500).send(e.stack));
 };
+
 router.get("/", onIndex);
 router.get("/users", onIndex);
 
