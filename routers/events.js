@@ -40,10 +40,38 @@ router.get("/events", onIndex);
 //get new event form
 
 router.get("/events/new", (req, res) => {
+	//find the calendars to display in a select box
 	Calendar.findAll()
 		.then(calendars => {
 			res.render("events/new", { calendars });
 			console.log("calendars:", JSON.stringify(calendars, null, 2));
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
+//Show a calendar
+
+router.get("/events/:id", (req, res) => {
+	_Event
+		.findById(req.params.id, {
+			include: [
+				{
+					model: Calendar,
+					include: [
+						{
+							model: User
+						}
+					]
+				}
+			]
+		})
+		.then(_event => {
+			if (_event) {
+				// console.log("_event:", JSON.stringify(_event, null, 2));
+				res.render("events/show", { _event });
+			} else {
+				res.send(404);
+			}
 		})
 		.catch(e => res.status(500).send(e.stack));
 });
