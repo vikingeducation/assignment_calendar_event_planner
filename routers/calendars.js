@@ -36,5 +36,23 @@ router.get("/calendars/new", (req, res) => {
 	res.render("calendars/new");
 });
 
+// create new calendar
+router.post("/calendars", (req, res) => {
+	var body = req.body;
+
+	var userParams = {
+		fname: body.user.fname,
+		lname: body.user.lname,
+		username: body.user.username,
+		email: body.user.email
+	};
+
+	User.create(userParams)
+		.then(user => {
+			res.redirect(`/users/${user.id}`);
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
 // exports
 module.exports = router;
