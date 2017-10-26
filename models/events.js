@@ -1,10 +1,14 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-	var Calendars = sequelize.define(
-		"Calendars",
+	var Events = sequelize.define(
+		"Events",
 		{
 			name: DataTypes.STRING,
-			userId: DataTypes.INTEGER
+			description: DataTypes.STRING,
+			date: DataTypes.DATE,
+			start_time: DataTypes.DATE,
+			end_time: DataTypes.DATE,
+			calender_id: DataTypes.INTEGER
 		},
 		{
 			classMethods: {
@@ -14,5 +18,5 @@ module.exports = (sequelize, DataTypes) => {
 			}
 		}
 	);
-	return Calendars;
+	return Events;
 };

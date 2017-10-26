@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var models = require("./../models");
-var Calendar = models.Calendar;
+var Calendar = models.Calendars;
 var sequelize = models.sequelize;
 var User = models.Users;
 
@@ -9,7 +9,7 @@ var User = models.Users;
 User.hasMany(Calendar, { foreignKey: "userId" });
 Calendar.belongsTo(User, { foreignKey: "userId" });
 
-// instead of making multiple querie I joined them
+// instead of making multiple queries I joined them
 // users and calendars in one query
 // https://stackoverflow.com/questions/20460270/how-to-make-join-querys-using-sequelize-in-nodejs
 // https://lorenstewart.me/2016/09/12/sequelize-table-associations-joins/

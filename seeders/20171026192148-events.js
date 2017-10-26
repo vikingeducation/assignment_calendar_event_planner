@@ -39,6 +39,6 @@ module.exports = {
       return queryInterface.bulkDelete('Person', null, {});
     */
 
-		return queryInterface.bulkDelete("Events", null, {}, models.Event);
+		return queryInterface.bulkDelete("Events", null, {}, models.Events);
 	}
 };
