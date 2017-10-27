@@ -3,6 +3,7 @@ var router = express.Router();
 var models = require("./../models");
 var User = models.Users;
 var sequelize = models.sequelize;
+var Calendar = models.Calendars;
 
 // User INDEX
 var onIndex = (req, res) => {
@@ -14,7 +15,6 @@ var onIndex = (req, res) => {
 };
 
 router.get("/", onIndex);
-router.get("/users", onIndex);
 
 router.get("/users/new", (req, res) => {
 	res.render("users/new");
@@ -43,6 +43,7 @@ router.get("/users/:id", (req, res) => {
 	User.findById(req.params.id)
 		.then(user => {
 			if (user) {
+				// console.log("USERS:", JSON.stringify(users, null, 2));
 				res.render("users/show", { user });
 			} else {
 				res.send(404);

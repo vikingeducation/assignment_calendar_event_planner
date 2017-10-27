@@ -81,7 +81,7 @@ router.post("/invitation", (req, res) => {
 		user_id: req.body.event.user
 	};
 
-	console.log("invitationParams", JSON.stringify(invitationParams, null, 2));
+	// console.log("invitationParams", JSON.stringify(invitationParams, null, 2));
 
 	Invitation.create(invitationParams)
 		.then(() => {
