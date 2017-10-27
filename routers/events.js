@@ -109,8 +109,6 @@ router.get("/events/:id/edit", (req, res) => {
 router.post("/event", (req, res) => {
 	var body = req.body;
 
-	// console.log("CALENDAR", calendar);
-
 	var eventParams = {
 		name: body.event.name,
 		description: body.event.description,
@@ -124,9 +122,35 @@ router.post("/event", (req, res) => {
 
 	_Event
 		.create(eventParams)
-		.then(event => {
+		.then(_event => {
 			req.method = "GET";
-			res.redirect(`/events/${event.id}`);
+			res.redirect(`/events/${_event.id}`);
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
+// update a event with put
+
+router.put("/events/:id", (req, res) => {
+	var eventParams = {
+		name: req.body.event.name,
+		description: req.body.event.description,
+		date: req.body.event.date,
+		start_time: req.body.event.start_time,
+		end_time: req.body.event.end_time
+	};
+
+	console.log("req.body", req.body);
+	console.log("eventParams", eventParams);
+
+	_Event
+		.update(eventParams, {
+			where: { id: req.params.id },
+			limit: 1
+		})
+		.then(() => {
+			req.method = "GET";
+			res.redirect(`/events/${req.params.id}`);
 		})
 		.catch(e => res.status(500).send(e.stack));
 });
