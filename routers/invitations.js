@@ -42,7 +42,7 @@ var onIndex = (req, res) => {
 	}) // bracket disaster
 		.then(invitations => {
 			res.render("invitations/index", { invitations });
-			console.log("INVITATIONS:", JSON.stringify(invitations, null, 2));
+			// console.log("INVITATIONS:", JSON.stringify(invitations, null, 2));
 		})
 		.catch(e => res.status(500).send(e.stack));
 };
@@ -51,4 +51,59 @@ var onIndex = (req, res) => {
 
 router.get("/invitations", onIndex);
 
+//Get invitations new page
+router.get("/invitations/new", (req, res) => {
+	_Event
+		.findAll({
+			include: [
+				{
+					model: Calendar,
+					include: [
+						{
+							model: User
+						}
+					]
+				}
+			]
+		})
+		.then(events => {
+			res.render("invitations/new", { events });
+			// console.log("INVITATIONS EVENT OBJ:", JSON.stringify(events, null, 2));
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
+// Post a new Invitation
+
+router.post("/invitation", (req, res) => {
+	var invitationParams = {
+		event_id: req.body.event.id,
+		user_id: req.body.event.user
+	};
+
+	console.log("invitationParams", JSON.stringify(invitationParams, null, 2));
+
+	Invitation.create(invitationParams)
+		.then(() => {
+			req.method = "GET";
+			res.redirect("/invitations");
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
+// delete an invitation
+
+router.delete("/invitations/:id", (req, res) => {
+	Invitation.destroy({
+		where: { id: req.params.id },
+		limit: 1
+	})
+		.then(() => {
+			req.method = "GET";
+			res.redirect("/invitations");
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
+// exports
 module.exports = router;
