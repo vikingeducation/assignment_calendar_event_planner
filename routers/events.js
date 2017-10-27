@@ -96,7 +96,7 @@ router.get("/events/:id/edit", (req, res) => {
 		.then(_event => {
 			if (_event) {
 				res.render("events/edit", { _event });
-				// console.log("_event:", JSON.stringify(_event, null, 2));
+				console.log("_event:", JSON.stringify(_event, null, 2));
 			} else {
 				res.send(404);
 			}
@@ -140,8 +140,8 @@ router.put("/events/:id", (req, res) => {
 		end_time: req.body.event.end_time
 	};
 
-	console.log("req.body", req.body);
-	console.log("eventParams", eventParams);
+	// console.log("req.body", req.body);
+	// console.log("eventParams", eventParams);
 
 	_Event
 		.update(eventParams, {
@@ -151,6 +151,20 @@ router.put("/events/:id", (req, res) => {
 		.then(() => {
 			req.method = "GET";
 			res.redirect(`/events/${req.params.id}`);
+		})
+		.catch(e => res.status(500).send(e.stack));
+});
+
+// destroy an event
+router.delete("/events/:id", (req, res) => {
+	_Event
+		.destroy({
+			where: { id: req.params.id },
+			limit: 1
+		})
+		.then(() => {
+			req.method = "GET";
+			res.redirect("/events");
 		})
 		.catch(e => res.status(500).send(e.stack));
 });
