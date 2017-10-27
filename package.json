@@ -26,6 +26,7 @@
 		"express": "^4.16.2",
 		"express-handlebars": "^3.0.0",
 		"express-method-override-get-post-support": "0.0.7",
+		"handlebars-intl": "^1.1.2",
 		"method-override": "^2.3.10",
 		"morgan": "^1.9.0",
 		"morgan-toolkit": "^1.0.2",

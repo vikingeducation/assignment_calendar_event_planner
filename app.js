@@ -30,6 +30,7 @@ app.use("/", eventRoutes);
 
 // Template Engine
 var expressHandlebars = require("express-handlebars");
+var handlebars = require("handlebars");
 
 var hbs = expressHandlebars.create({
 	partialsDir: "views/",

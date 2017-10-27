@@ -23,7 +23,7 @@ module.exports = {
 				date: `2017-10-26`,
 				start_time: "10:00:00",
 				end_time: "12:00:00",
-				calender_id: i
+				calendar_id: i
 			});
 		}
 

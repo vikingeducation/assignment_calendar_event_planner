@@ -23,7 +23,7 @@ module.exports = {
 			end_time: {
 				type: Sequelize.TIME
 			},
-			calender_id: {
+			calendar_id: {
 				type: Sequelize.INTEGER
 			},
 			createdAt: {
