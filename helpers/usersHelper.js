@@ -6,7 +6,7 @@ UsersHelper.newUserPath = () => '/users/new';
 UsersHelper.editUserPath = (id) => `/users/${ id }/edit`;
 UsersHelper.destroyUserPath = (id) => `/users/${ id }?_method=delete`;
 
-UsersHelper.formAction = (user) => {
+UsersHelper.userFormAction = (user) => {
   if (user) {
     return `/users/${ user.id }`;
   } else {

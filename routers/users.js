@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const models = require('./../models');
-const User = models.User;
-const sequelize = models.sequelize;
+const db = require('./../models');
+const sequelize = db.sequelize;
 
 
 // ----------------------------------------
 // Index
 // ----------------------------------------
 const usersIndex = (req, res) => {
-  User.findAll()
+  db.users.findAll()
   .then(users => {
     res.render('users/index', { users });
   })
@@ -33,7 +32,7 @@ router.get('/users/new', (req, res) => {
 router.post('/users', (req, res) => {
   let userParams = getUserParams(req);
 
-  User.create(userParams)
+  db.users.create(userParams)
     .then(user => {
       res.redirect(`/users/${ user.id }`);
     })
@@ -45,7 +44,7 @@ router.post('/users', (req, res) => {
 // Show
 // ----------------------------------------
 router.get('/users/:id', (req, res) => {
-  User.findById(req.params.id)
+  db.users.findById(req.params.id)
     .then(user => {
       if (user) {
         res.render('users/show', { user });
@@ -61,7 +60,7 @@ router.get('/users/:id', (req, res) => {
 // Edit
 // ----------------------------------------
 router.get('/users/:id/edit', (req, res) => {
-  User.findById(req.params.id)
+  db.users.findById(req.params.id)
     .then(user => {
       if (user) {
         res.render('partials/_userForm', { user });
@@ -77,11 +76,11 @@ router.get('/users/:id/edit', (req, res) => {
 // Update
 // ----------------------------------------
 router.put('/users/:id', (req, res) => {
-  User.findById(req.params.id)
+  db.users.findById(req.params.id)
     .then(user => {
       if (user) {
         let userParams = getUserParams(req);
-        User.update(userParams, {
+        db.users.update(userParams, {
           where: { id: user.id },
           limit: 1
         })
@@ -101,7 +100,7 @@ router.put('/users/:id', (req, res) => {
 // Delete
 // ----------------------------------------
 router.delete('/users/:id', (req, res) => {
-  User.destroy({
+  db.users.destroy({
     where: { id: req.params.id },
     limit: 1
   })

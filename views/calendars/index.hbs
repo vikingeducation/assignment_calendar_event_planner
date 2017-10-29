@@ -1,0 +1,32 @@
+<h1>Calendars Index</h1>
+<a href="{{newCalendarPath}}" class="btn btn-primary">+ New Calendar</a>
+<table class="table table-stripped table-bordered">
+  <thead>
+    <tr>
+      <th>Calendar Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each calendars}}
+      <tr>
+        <td>
+          <a href="{{calendarPath this.id}}">
+            {{this.name}}
+          </a>
+        </td>
+        <td>
+          <a href="{{userPath this.user.id}}">
+            {{this.user.username}}
+          </a>
+        </td>
+        <td>{{this.user.email}}</td>
+        <td><a href="{{editCalendarPath this.id}}">edit</a></td>
+        <td><a href="{{destroyCalendarPath this.id}}">delete</a></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

@@ -1,0 +1,9 @@
+<header class="page-header">
+  <h1>User: {{ calendar.name }}</h1>
+  <a href="{{editCalendarPath calendar.id}}" class="btn btn-primary">Edit</a>
+  <a href="{{destroyCalendarPath calendar.id}}" class="btn btn-danger">Delete</a>
+</header>
+
+<p><b>Calendar Name:</b> {{ calendar.name }}</p>
+<p><b>Username:</b> {{ calendar.user.username }}</p>
+

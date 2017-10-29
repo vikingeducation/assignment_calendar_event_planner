@@ -38,11 +38,31 @@ app.use(morganToolkit());
 
 
 // ----------------------------------------
+// Sessions/Cookies
+// ----------------------------------------
+var cookieSession = require('cookie-session');
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['asdf1234567890qwer']
+}));
+
+
+// ----------------------------------------
+// Flash Messages
+// ----------------------------------------
+var flash = require('express-flash-messages');
+app.use(flash());
+
+
+// ----------------------------------------
 // Routes
 // ----------------------------------------
-const usersRoutes = require('./routers/users');
-app.use('/', usersRoutes);
+const users = require('./routers/users');
+const calendars = require('./routers/calendars');
 
+app.use('/', users);
+app.use('/calendars', calendars);
 
 // ----------------------------------------
 // Template Engine
