@@ -60,9 +60,12 @@ app.use(flash());
 // ----------------------------------------
 const users = require('./routers/users');
 const calendars = require('./routers/calendars');
+const events = require('./routers/events');
 
 app.use('/', users);
 app.use('/calendars', calendars);
+app.use('/events', events);
+
 
 // ----------------------------------------
 // Template Engine
@@ -79,7 +82,6 @@ const hbs = expressHandlebars.create({
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
-
 
 
 // ----------------------------------------

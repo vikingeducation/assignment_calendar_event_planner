@@ -6,7 +6,7 @@ module.exports = {
     for (let i = 0; i < 10; i++) {
       calendars.push({
         name: `My Calendar ${ i }`,
-        userId: i
+        userId: i + 1
       });
     }
     return queryInterface.bulkInsert('Calendars', calendars);

@@ -16,9 +16,11 @@ db.sequelize = sequelize;
 //Models/tables
 db.users = require('./user')(sequelize, Sequelize);
 db.calendars = require('./calendar.js')(sequelize, Sequelize);
+db.events = require('./event.js')(sequelize, Sequelize);
 
 //Relations
 db.calendars.belongsTo(db.users, { foreignKey: 'userId', as: 'user'});
+db.events.belongsTo(db.calendars, { foreignKey: 'calendarId', as: 'calendar'});
 
 
 module.exports = db;

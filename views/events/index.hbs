@@ -1,0 +1,44 @@
+<h1>Events Index</h1>
+<a href="{{newEventPath}}" class="btn btn-primary">+ New Event</a>
+<table class="table table-stripped table-bordered">
+  <thead>
+    <tr>
+      <th>Event Name</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Calendar Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each events}}
+      <tr>
+        <td>
+          <a href="{{eventPath this.id}}">
+            {{this.name}}
+          </a>
+        </td>
+        <td>{{this.date}}</td>
+        <td>{{this.start}}</td>
+        <td>{{this.end}}</td>
+        <td>
+          <a href="{{calendarPath this.calendar.id}}">
+            {{this.calendar.name}}
+          </a>
+        </td>
+        <td>
+          <a href="{{userPath this.calendar.user.id}}">
+            {{this.calendar.user.username}}
+          </a>
+        </td>
+        <td>{{this.calendar.user.email}}</td>
+        <td><a href="{{editEventPath this.id}}">edit</a></td>
+        <td><a href="{{destroyEventPath this.id}}">delete</a></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
