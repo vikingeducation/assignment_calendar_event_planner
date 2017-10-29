@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <label for="event_date">Date</label>
-    <input type="date" class="form-control" name="event[date]" id="event_date" value="{{ event.date }}" required>
+    <input type="date" class="form-control" name="event[date]" id="event_date" value="{{ formatDateForForm event.date }}" required>
   </div>
 
   <div class="form-group">
@@ -39,7 +39,7 @@
 
   <div class="form-group">
     <label for="event_description">Description</label>
-    <textarea rows="5" class="form-control" name="event[description]" id="event_description" value="{{ event.description }}" required></textarea>
+    <textarea rows="5" class="form-control" name="event[description]" id="event_description" required>{{ event.description }}</textarea>
   </div>
 
   <div class="form-group">
