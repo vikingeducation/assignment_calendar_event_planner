@@ -29,3 +29,33 @@
     <dt>Description: </dt>
     <dd>{{event.description}}</dd>
 </dl>
+
+
+<h2>Invitations</h2>
+<a href="{{newInvitationPath event.id}}" class="btn btn-primary">+ New Invitation</a>
+{{#if event.invitations}}
+    <table class="table table-stripped table-bordered">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each event.invitations}}
+          <tr>
+            <td>
+              <a href="{{userPath this.user.id}}">
+                {{this.user.username}}
+              </a>
+            </td>
+            <td>{{this.user.email}}</td>
+            <td><a href="{{destroyInvitationPath this.id}}">delete</a></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+{{else}}
+    <p>There are no invitations yet</p>
+{{/if}}

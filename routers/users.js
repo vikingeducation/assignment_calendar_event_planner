@@ -44,7 +44,15 @@ router.post('/users', (req, res) => {
 // Show
 // ----------------------------------------
 router.get('/users/:id', (req, res) => {
-  db.users.findById(req.params.id)
+  db.users.find({
+    where: { id: req.params.id },
+    include: [
+      {
+        model: db.calendars,
+        as: 'calendars'
+      }
+    ]
+  })
     .then(user => {
       if (user) {
         res.render('users/show', { user });

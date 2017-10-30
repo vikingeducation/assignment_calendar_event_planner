@@ -63,10 +63,16 @@ router.post('/', (req, res) => {
 // ----------------------------------------
 router.get('/:id', (req, res) => {
   db.calendars.findById(req.params.id, {
-    include: [{
+    include: [
+    {
       model: db.users,
       as: 'user'
-    }]
+    },
+    {
+      model: db.events,
+      as: 'events'
+    }
+    ]
   })
     .then(calendar => {
       if (calendar) {
@@ -142,7 +148,7 @@ router.delete('/:id', (req, res) => {
     limit: 1
   })
     .then(() => {
-      res.redirect('/calendars');
+      res.redirect('back');
     })
     .catch(e => res.status(500).send(e.stack));
 });

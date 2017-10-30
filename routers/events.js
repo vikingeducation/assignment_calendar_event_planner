@@ -132,7 +132,7 @@ router.delete('/:id', (req, res) => {
   })
   .then(() => {
     req.flash('success', 'Event successfully deleted');
-    res.redirect('/events');
+    res.redirect('back');
   })
   .catch(e => res.status(500).send(e.stack));
 });
@@ -160,6 +160,16 @@ const findEvent = (id) => {
       {
         model: db.calendars,
         as: 'calendar',
+        include: [
+          {
+            model: db.users,
+            as: 'user'
+          }
+        ]
+      },
+      {
+        model: db.invitations,
+        as: 'invitations',
         include: [
           {
             model: db.users,
