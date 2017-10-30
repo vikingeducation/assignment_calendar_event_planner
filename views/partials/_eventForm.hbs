@@ -1,0 +1,48 @@
+<header class="page-header">
+  {{#if event}}
+    <h1>Edit Event: {{ event.name }}</h1>
+  {{else}}
+    <h1>New Event</h1>
+  {{/if}}
+</header>
+
+<form action="{{eventFormAction event}}" method="post">
+  {{#if event}}
+    <input type="hidden" name="_method" value="put">
+  {{/if}}
+
+  <h2>Event Info</h2>
+  <div class="form-group">
+    <label for="event_name">Event Name</label>
+    <input type="text" class="form-control" name="event[name]" id="event_name" value="{{ event.name }}" required>
+  </div>
+
+  <div class="form-group">
+    <label for="event_date">Date</label>
+    <input type="date" class="form-control" name="event[date]" id="event_date" value="{{ formatDateForForm event.date }}" required>
+  </div>
+
+  <div class="form-group">
+    <label for="event_start">Start Time</label>
+    <input type="time" class="form-control" name="event[start]" id="event_start" value="{{ event.start }}" required>
+  </div>
+
+  <div class="form-group">
+    <label for="event_end">End Time</label>
+    <input type="time" class="form-control" name="event[end]" id="event_end" value="{{ event.end }}" required>
+  </div>
+
+  <div class="form-group">
+    <label for="event_calendar">Calendar</label>
+    <input type="text" class="form-control" name="event[calendar]" id="event_calendar" value="{{ event.calendar.name }}" required>
+  </div>
+
+  <div class="form-group">
+    <label for="event_description">Description</label>
+    <textarea rows="5" class="form-control" name="event[description]" id="event_description" required>{{ event.description }}</textarea>
+  </div>
+
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary">
+  </div>
+</form>

@@ -1,0 +1,43 @@
+<header class="page-header">
+  <h1>Calendar: {{ calendar.name }}</h1>
+  <a href="{{editCalendarPath calendar.id}}" class="btn btn-primary">Edit</a>
+  <a href="{{destroyCalendarPath calendar.id}}" class="btn btn-danger">Delete</a>
+</header>
+
+<dl class="dl-horizontal">
+    <dt>Calendar Name: </dt>
+    <dd>{{ calendar.name }}</dd>
+
+    <dt>Username: </dt>
+    <dd>{{ calendar.user.username }}</dd>
+</dl>
+
+<h2>Events</h2>
+{{#if calendar.events}}
+    <table class="table table-stripped table-bordered">
+      <thead>
+        <tr>
+          <th>Event Name</th>
+          <th>Date</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each calendar.events}}
+            <td><a href="{{eventPath this.id}}">{{this.name}}</a></td>
+            <td>{{this.date}}</td>
+            <td>{{this.start}}</td>
+            <td>{{this.end}}</td>
+            <td><a href="{{editEventPath this.id}}">edit</a></td>
+            <td><a href="{{destroyEventPath this.id}}">delete</a></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+{{else}}
+    <p>This calendar does not have any events yet.</p>
+{{/if}}
+

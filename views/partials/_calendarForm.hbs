@@ -1,0 +1,27 @@
+<header class="page-header">
+  {{#if calendar}}
+    <h1>Edit Calendar: {{ calendar.name }}</h1>
+  {{else}}
+    <h1>New Calendar</h1>
+  {{/if}}
+</header>
+
+<form action="{{calendarFormAction calendar}}" method="post">
+  {{#if calendar}}
+    <input type="hidden" name="_method" value="put">
+  {{/if}}
+
+  <h2>Calendar Info</h2>
+  <div class="form-group">
+    <label for="calendar_name">Calendar Name</label>
+    <input type="text" class="form-control" name="calendar[name]" id="calendar_name" value="{{ calendar.name }}" required>
+  </div>
+  <div class="form-group">
+    <label for="calendar_user">Username</label>
+    <input type="text" class="form-control" name="calendar[username]" id="calendar_username" value="{{ calendar.user.username }}" required>
+  </div>
+
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary">
+  </div>
+</form>

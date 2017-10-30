@@ -1,0 +1,61 @@
+<header class="page-header">
+  <h1>Event: {{ event.name }}</h1>
+  <a href="{{editEventPath event.id}}" class="btn btn-primary">Edit</a>
+  <a href="{{destroyEventPath event.id}}" class="btn btn-danger">Delete</a>
+</header>
+
+<dl class="dl-horizontal">
+    <dt>Event Name: </dt>
+    <dd>{{event.name}}</dd>
+
+    <dt>Date: </dt>
+    <dd>{{event.date}}</dd>
+
+    <dt>Start Time: </dt>
+    <dd>{{event.start}}</dd>
+
+    <dt>End Time: </dt>
+    <dd>{{event.end}}</dd>
+
+    <dt>Calendar Name: </dt>
+    <dd>{{event.calendar.name}}</dd>
+
+    <dt>Username: </dt>
+    <dd>{{event.calendar.user.username}}</dd>
+
+    <dt>Email: </dt>
+    <dd>{{event.calendar.user.email}}</dd>
+
+    <dt>Description: </dt>
+    <dd>{{event.description}}</dd>
+</dl>
+
+
+<h2>Invitations</h2>
+<a href="{{newInvitationPath event.id}}" class="btn btn-primary">+ New Invitation</a>
+{{#if event.invitations}}
+    <table class="table table-stripped table-bordered">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each event.invitations}}
+          <tr>
+            <td>
+              <a href="{{userPath this.user.id}}">
+                {{this.user.username}}
+              </a>
+            </td>
+            <td>{{this.user.email}}</td>
+            <td><a href="{{destroyInvitationPath this.id}}">delete</a></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+{{else}}
+    <p>There are no invitations yet</p>
+{{/if}}
