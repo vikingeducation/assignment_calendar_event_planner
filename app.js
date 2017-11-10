@@ -43,6 +43,9 @@ app.use(morganToolkit());
 var usersRoutes = require('./routers/users');
 app.use('/', usersRoutes);
 
+var calendarsRoutes = require('./routers/calendars');
+app.use('/calendars', calendarsRoutes);
+
 
 // ----------------------------------------
 // Template Engine
