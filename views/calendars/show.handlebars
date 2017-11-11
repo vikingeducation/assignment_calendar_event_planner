@@ -1,0 +1,16 @@
+
+
+<header class="page-header">
+  <h1>Calendar: {{ calendar.name }}</h1>
+  <a href="/calendars/{{ calendar.id }}/edit" class="btn btn-primary">Edit</a>
+  <a href="/calendars/{{ calendar.id }}?_method=delete" class="btn btn-danger">Delete</a>
+</header>
+
+<p>Calendar Name: {{ calendar.name }}</p>
+<p>Username: <a href="/users/{{ calendar.User.id }}">{{ calendar.User.username }}</a> </p>
+<p>Email: <a href="/users/{{ calendar.User.id }}">{{ calendar.User.email }}</a> </p>
+
+
+
+
+
