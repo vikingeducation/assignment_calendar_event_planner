@@ -33,4 +33,16 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// Refer: https://lorenstewart.me/2016/09/12/sequelize-table-associations-joins/
+//Models/tables
+db.users = require('../models/user.js')(sequelize, Sequelize);  
+db.calendars = require('../models/calendar.js')(sequelize, Sequelize);  
+db.events = require('../models/event.js')(sequelize, Sequelize);
+
+//Relations
+db.calendars.hasMany(db.events, { foreignKey: "calendarId" });
+db.events.belongsTo(db.calendars, { foreignKey: "calendarId" });
+db.users.hasMany(db.calendars, { foreignKey: "userId" });
+db.calendars.belongsTo(db.users, { foreignKey: "userId" });
+
 module.exports = db;

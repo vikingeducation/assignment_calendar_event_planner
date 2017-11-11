@@ -46,6 +46,9 @@ app.use('/', usersRoutes);
 var calendarsRoutes = require('./routers/calendars');
 app.use('/calendars', calendarsRoutes);
 
+var eventRoutes = require('./routers/events');
+app.use('/events', eventRoutes);
+
 
 // ----------------------------------------
 // Template Engine
@@ -86,9 +89,11 @@ app.listen.apply(app, args);
 module.exports = app;
 
 
-
-
-
+//Command line commands
+// sequelize model:create --name Calendar --attributes "name:string userId:integer"
+// sequelize seed:create --name calendars
+// sequelize model:create --name Event --attributes "name:string description:string date:date startTime:time endTime:time calendarId:integer"
+// sequelize seed:create --name events
 
 
 

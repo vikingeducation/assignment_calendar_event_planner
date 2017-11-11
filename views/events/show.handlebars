@@ -1,0 +1,45 @@
+
+
+<header class="page-header">
+  <h1>Event: {{ event.name }}</h1>
+  <a href="/events/{{ event.id }}/edit" class="btn btn-primary">Edit</a>
+  <a href="/events/{{ event.id }}?_method=delete" class="btn btn-danger">Delete</a>
+</header>
+
+<h5>{{ event.description }}</h5>
+
+<table class="table">
+  <tr>
+    <td>Event Name: </td>
+    <td>{{ event.name }}</td>
+  </tr>
+  <tr>
+    <td>Date:</td>
+    <td>{{ event.date }}</td>
+  </tr>
+  <tr>
+    <td>Start Time:</td>
+    <td>{{ event.startTime }}</td>
+  </tr>
+  <tr>
+    <td>End Time:</td>
+    <td>{{ event.endTime }}</td>
+  </tr>
+  <tr>
+    <td>Calendar Name:</td>
+    <td><a href="/calendars/{{ event.Calendar.id }}">{{ event.Calendar.name }}</a></td>
+  </tr>
+  <tr>
+    <td>User Name:</td>
+    <td> <a href="/users/{{ event.Calendar.User.id }}">{{ event.Calendar.User.username}}</a> </td>
+  </tr>
+  <tr>
+    <td>User Email:</td>
+    <td>{{ event.Calendar.User.email}}</td>
+  </tr>
+</table></p>
+
+
+
+
+

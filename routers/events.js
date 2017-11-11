@@ -4,37 +4,17 @@ var models = require('./../models');
 var sequelize = models.sequelize;
 var db = require('./../models/index');
 
+
 // ----------------------------------------
 // Index
 // ----------------------------------------
 router.get('/', (req, res) => {
 
-  db.calendars.findAll({ include: [{ model: db.users }] })
-    .then(calendars => {
-
-
-  // var calendars;
-
-  // Calendar.findAll({})
-  //   .then(results => {
-  //     calendars = results;
-  //     var usersArr = [];
-
-  //     results.map(calendar => {
-  //       usersArr.push(User.findById(calendar.userId));
-  //     });
-  //     return Promise.all(usersArr);
-  //   })
-  //   .then(users => {
-  //     calendars.map(calendar => {
-  //       users.map(user => {
-  //         if (calendar.userId == user.id) {
-  //           calendar.user = user;
-  //         }
-  //       });
-  //     });
-
-      res.render('calendars/index', { calendars });
+  db.events.findAll({
+		include: [{ model: db.calendars, include: [{ model: db.users }] }]
+		})
+    .then(events => {
+		res.render('events/index', { events });
     })
     .catch(e => res.status(500).send(e.stack));
 });
@@ -44,7 +24,7 @@ router.get('/', (req, res) => {
 // New
 // ----------------------------------------
 router.get('/new', (req, res) => {
-  res.render('calendars/new');
+  res.render('events/new');
 });
 
 
@@ -53,10 +33,10 @@ router.get('/new', (req, res) => {
 // ----------------------------------------
 router.get('/:id/edit', (req, res) => {
 
-  db.calendars.findById(req.params.id)
-    .then(calendar => {
-      if (calendar) {
-        res.render('calendars/edit', { calendar });
+  db.events.findById(req.params.id)
+    .then(event => {
+      if (event) {
+        res.render('events/edit', { event });
       } else {
         res.send(404);
       }
@@ -70,10 +50,13 @@ router.get('/:id/edit', (req, res) => {
 // ----------------------------------------
 router.get('/:id', (req, res) => {
 
-  db.calendars.findById(req.params.id, { include: [{ model: db.users }] })
-    .then(calendar => {
-      if (calendar) {
-        res.render('calendars/show', { calendar });
+  db.events.findById(req.params.id, 
+  	{
+			include: [{ model: db.calendars, include: [{ model: db.users }] }]
+		})
+    .then(event => {
+      if (event) {
+        res.render('events/show', { event });
       } else {
         res.send(404);
       }
@@ -88,14 +71,18 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   var body = req.body;
 
-  var calendarParams = {
-    name: body.calendar.name,
-    userId: body.calendar.userId
+  var eventParams = {
+    name: body.event.name,
+    description: body.event.description,
+    date: body.event.date,
+    startTime: body.event.startTime,
+    endTime: body.event.endTime,
+    calendarId: body.event.calendarId
   };
 
-  db.calendars.create(calendarParams)
-    .then((calendar) => {
-      res.redirect(`/calendars/${ calendar.id }`);
+  db.events.create(eventParams)
+    .then((event) => {
+      res.redirect(`/events/${ event.id }`);
     })
     .catch((e) => res.status(500).send(e.stack));
 });
@@ -105,18 +92,22 @@ router.post('/', (req, res) => {
 // Update
 // ----------------------------------------
 router.put('/:id', (req, res) => {
-  var calendarParams = req.body.calendar;
+  var eventParams = req.body.event;
 
-  db.calendars.update({
-    name: calendarParams.name,
-    userId: calendarParams.userId
+  db.events.update({
+    name: eventParams.name,
+    description: eventParams.description,
+    date: eventParams.date,
+    startTime: eventParams.startTime,
+    endTime: eventParams.endTime,
+    calendarId: eventParams.calendarId
   }, {
     where: { id: req.params.id },
     limit: 1
   })
     .then(() => {
       req.method = 'GET';
-      res.redirect(`/calendars/${ req.params.id }`);
+      res.redirect(`/events/${ req.params.id }`);
     })
     .catch((e) => res.status(500).send(e.stack));
 });
@@ -126,15 +117,16 @@ router.put('/:id', (req, res) => {
 // Destroy
 // ----------------------------------------
 router.delete('/:id', (req, res) => {
-  db.calendars.destroy({
+  db.events.destroy({
     where: { id: req.params.id },
     limit: 1
   })
     .then(() => {
       req.method = 'GET';
-      res.redirect('/calendars');
+      res.redirect('/events');
     })
     .catch((e) => res.status(500).send(e.stack));
 });
+
 
 module.exports = router;
