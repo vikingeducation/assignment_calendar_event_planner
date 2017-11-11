@@ -24,7 +24,10 @@ router.get('/', (req, res) => {
 // New
 // ----------------------------------------
 router.get('/new', (req, res) => {
-  res.render('events/new');
+  db.calendars.findAll({})
+  .then(calendars => {
+    res.render('events/new', { calendars });
+  });
 });
 
 
@@ -69,15 +72,15 @@ router.get('/:id', (req, res) => {
 // Create
 // ----------------------------------------
 router.post('/', (req, res) => {
-  var body = req.body;
+  var ev = req.body.event;
 
   var eventParams = {
-    name: body.event.name,
-    description: body.event.description,
-    date: body.event.date,
-    startTime: body.event.startTime,
-    endTime: body.event.endTime,
-    calendarId: body.event.calendarId
+    name: ev.name,
+    description: ev.description,
+    date: ev.date,
+    startTime:ev.startTime,
+    endTime: ev.endTime,
+    calendarId: ev.calendar
   };
 
   db.events.create(eventParams)
@@ -99,8 +102,7 @@ router.put('/:id', (req, res) => {
     description: eventParams.description,
     date: eventParams.date,
     startTime: eventParams.startTime,
-    endTime: eventParams.endTime,
-    calendarId: eventParams.calendarId
+    endTime: eventParams.endTime
   }, {
     where: { id: req.params.id },
     limit: 1

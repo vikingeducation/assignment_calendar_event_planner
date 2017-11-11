@@ -38,8 +38,11 @@ db.Sequelize = Sequelize;
 db.users = require('../models/user.js')(sequelize, Sequelize);  
 db.calendars = require('../models/calendar.js')(sequelize, Sequelize);  
 db.events = require('../models/event.js')(sequelize, Sequelize);
+db.invitations = require('../models/invitation.js')(sequelize, Sequelize);
 
 //Relations
+db.events.hasMany(db.invitations, { foreignKey: "eventId" });
+db.invitations.belongsTo(db.events, { foreignKey: "eventId" });
 db.calendars.hasMany(db.events, { foreignKey: "calendarId" });
 db.events.belongsTo(db.calendars, { foreignKey: "calendarId" });
 db.users.hasMany(db.calendars, { foreignKey: "userId" });

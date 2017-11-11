@@ -44,7 +44,11 @@ router.get('/', (req, res) => {
 // New
 // ----------------------------------------
 router.get('/new', (req, res) => {
-  res.render('calendars/new');
+  db.users.findAll({})
+  .then(users => {
+    res.render('calendars/new', { users });
+  })
+  
 });
 
 
@@ -86,11 +90,11 @@ router.get('/:id', (req, res) => {
 // Create
 // ----------------------------------------
 router.post('/', (req, res) => {
-  var body = req.body;
+  var cal = req.body.calendar;
 
   var calendarParams = {
-    name: body.calendar.name,
-    userId: body.calendar.userId
+    name: cal.name,
+    userId:cal.owner
   };
 
   db.calendars.create(calendarParams)
