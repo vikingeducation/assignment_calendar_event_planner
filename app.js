@@ -9,14 +9,17 @@ const getPostSupport = require('express-method-override-get-post-support');
 
 app.use(methodOverride(getPostSupport.callback, getPostSupport.options));
 
-app.use(express.static(`${__dirname}/public`));
+// app.use(express.static(`${__dirname}/public`));
 
+// Logging
 const morgan = require('morgan');
 app.use(morgan('tiny'));
 
 // Routes
-const usersRoutes = require('./routers/users');
+const usersRoutes = require('./controllers/users');
 app.use('/', usersRoutes);
+const calendarsRoutes = require('./controllers/calendars');
+app.use('/calendars', calendarsRoutes);
 
 // Template engine
 const expressHandlebars = require('express-handlebars');
@@ -29,6 +32,7 @@ const hbs = expressHandlebars.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+// Server
 const port = process.env.PORT || process.argv[2] || 3000;
 const host = 'localhost';
 

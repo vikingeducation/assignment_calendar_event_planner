@@ -2,8 +2,8 @@ const express = require('express');
 const models = require('./../models');
 
 const router = express.Router();
-const User = models.User;
 const sequelize = models.sequelize;
+const User = models.User;
 
 // Index
 const onIndex = (req, res) => {
