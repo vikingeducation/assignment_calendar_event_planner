@@ -4,8 +4,8 @@ const { amendCalendars } = require('./../helpers/calendars');
 
 const router = express.Router();
 const sequelize = models.sequelize;
-const Calendar = models.Calendar;
 const User = models.User;
+const Calendar = models.Calendar;
 
 // Index
 const onIndex = (req, res) => {
