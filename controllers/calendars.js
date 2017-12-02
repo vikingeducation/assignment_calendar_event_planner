@@ -6,6 +6,7 @@ const router = express.Router();
 const sequelize = models.sequelize;
 const User = models.User;
 const Calendar = models.Calendar;
+const Event = models.Event;
 
 // Index
 const onIndex = (req, res) => {
@@ -46,15 +47,21 @@ router.get('/:id/edit', (req, res) => {
 // Show
 router.get('/:id', (req, res) => {
   let calendar;
+  let events;
+  const p1 = Calendar.findById(req.params.id);
+  const p2 = Event.findAll({
+    where: { calendarId: req.params.id }
+  });
 
-  Calendar.findById(req.params.id)
-    .then(c => {
-      calendar = c;
+  Promise.all([p1, p2])
+    .then(values => {
+      calendar = values[0];
+      events = values[1];
       return User.findById(calendar.userId);
     })
     .then(user => {
       if (calendar && user) {
-        res.render('calendars/show', { calendar, user });
+        res.render('calendars/show', { calendar, user, events });
       } else {
         res.send(404);
       }

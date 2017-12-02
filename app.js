@@ -9,8 +9,6 @@ const getPostSupport = require('express-method-override-get-post-support');
 
 app.use(methodOverride(getPostSupport.callback, getPostSupport.options));
 
-// app.use(express.static(`${__dirname}/public`));
-
 // Logging
 const morgan = require('morgan');
 app.use(morgan('tiny'));

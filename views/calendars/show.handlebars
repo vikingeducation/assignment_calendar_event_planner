@@ -14,5 +14,13 @@
       <td>Username</td>
       <td>{{ user.username }}</td>
     </tr>
+    <tr>
+      <td>Events</td>
+      <td>
+        {{#each events as |event| }}
+        <a href="/events/{{ event.id }}">{{ event.name }}</a><br>
+        {{/each }}
+      </td>
+    </tr>
   </tbody>
 </table>

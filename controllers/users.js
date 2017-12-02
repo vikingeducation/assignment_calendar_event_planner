@@ -4,6 +4,7 @@ const models = require('./../models');
 const router = express.Router();
 const sequelize = models.sequelize;
 const User = models.User;
+const Calendar = models.Calendar;
 
 // Index
 const onIndex = (req, res) => {
@@ -37,10 +38,17 @@ router.get('/users/:id/edit', (req, res) => {
 
 // Show
 router.get('/users/:id', (req, res) => {
-  User.findById(req.params.id)
-    .then(user => {
-      if (user) {
-        res.render('users/show', { user });
+  const p1 = User.findById(req.params.id);
+  const p2 = Calendar.findAll({
+    where: { userId: req.params.id }
+  });
+
+  Promise.all([p1, p2])
+    .then(values => {
+      if (values) {
+        const user = values[0];
+        const calendars = values[1];
+        res.render('users/show', { user, calendars });
       } else {
         res.send(404);
       }

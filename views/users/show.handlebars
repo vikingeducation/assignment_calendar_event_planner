@@ -22,5 +22,13 @@
       <td>Email</td>
       <td>{{ user.email }}</td>
     </tr>
+    <tr>
+      <td>Calendars</td>
+      <td>
+        {{#each calendars as |calendar| }}
+        <a href="/calendars/{{ calendar.id }}">{{ calendar.name }}</a><br>
+        {{/each }}
+      </td>
+    </tr>
   </tbody>
 </table>
