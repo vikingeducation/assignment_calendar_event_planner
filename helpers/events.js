@@ -1,5 +1,4 @@
 const amendEvents = (events, calendars, users) => {
-  console.log(calendars);
   events.forEach(event => {
     let calendarFilter = calendars.filter(c => {
       return c.id === event.calendarId;

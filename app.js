@@ -19,9 +19,11 @@ app.use(morgan('tiny'));
 const usersRoutes = require('./controllers/users');
 const calendarsRoutes = require('./controllers/calendars');
 const eventsRoutes = require('./controllers/events');
+const invitationsRoutes = require('./controllers/invitations');
 app.use('/', usersRoutes);
 app.use('/calendars', calendarsRoutes);
 app.use('/events', eventsRoutes);
+app.use('/invitations', invitationsRoutes);
 
 // Template engine
 const expressHandlebars = require('express-handlebars');
