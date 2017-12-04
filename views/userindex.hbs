@@ -1,8 +1,30 @@
-<div class="row">
-  <div class="col-sm-2">First Name</div>
-  <div class="col-sm-2">Last Name</div>
-  <div class="col-sm-2">Username</div>
-  <div class="col-sm-2">Email</div>
-  <div class="col-sm-2">Edit</div>
-  <div class="col-sm-2">Delete</div>
+<h2>Users Index</h2>
+
+<div class="container">
+  <div class="row">
+    <a href="/users/new"><button class="btn btn-primary btn-lg">+ New User</button></a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">First Name</div>
+    <div class="col-sm-2">Last Name</div>
+    <div class="col-sm-2">Username</div>
+    <div class="col-sm-2">Email</div>
+    <div class="col-sm-2">Edit</div>
+    <div class="col-sm-2">Delete</div>
+  </div>
+  {{#each users as |user|}}
+  <div class="row">
+    <a href="/users/{{user.id}}">
+      <div class="col-sm-2">{{user.fname}}</div>
+      <div class="col-sm-2">{{user.lname}}</div>
+      <div class="col-sm-2">{{user.username}}</div>
+      <div class="col-sm-2">{{user.email}}</div>
+    </a>
+    <div class="col-sm-2"><a href="/users/{{user.id}}/edit">Edit</a></div>
+    <div class="col-sm-2"><a href="/users/{{user.id}}/delete">Delete</a></div>
+  </div>
+  {{/each}}
 </div>
