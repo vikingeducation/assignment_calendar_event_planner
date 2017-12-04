@@ -24,7 +24,12 @@
       <div class="col-sm-2">{{user.email}}</div>
     </a>
     <div class="col-sm-2"><a href="/users/{{user.id}}/edit">Edit</a></div>
-    <div class="col-sm-2"><a href="/users/{{user.id}}/delete">Delete</a></div>
+    <div class="col-sm-2">
+        <form action='/users/{{user.id}}/delete' method='post'>
+          <a onclick="this.parentNode.submit()" href="#">Delete</a>
+        </form>
+    </div>
+    
   </div>
   {{/each}}
 </div>

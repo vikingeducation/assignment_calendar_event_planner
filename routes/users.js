@@ -9,8 +9,7 @@ var sequelize = models.sequelize;
 /* GET users listing. */
 router.get("/", function(req, res, next) {
   User.findAll().then(users => {
-    console.log(users);
-    res.render("userindex", {users: users});
+    res.render("userindex", { users: users });
   });
 });
 
@@ -21,15 +20,26 @@ router.get("/new", function(req, res, next) {
 router.post("/new", function(req, res, next) {
   console.log("post starting");
   User.create({
-    fname: req.body.firstname,
-    lname: req.body.lastname,
-    username: req.body.username,
-    email: req.body.email
-  })
+      fname: req.body.firstname,
+      lname: req.body.lastname,
+      username: req.body.username,
+      email: req.body.email
+    })
     .then(user => {
-      res.redirect(`/${user.id}`);
+      console.log(`/users/${user.id}`);
+      req.method = 'GET';
+      res.redirect(`/users/${user.id}`);
     })
     .catch(e => res.status(500).send(e.stack));
+});
+
+router.post("/:id/delete", function(req, res, next) {
+  console.log("into delete post router")
+  User.destroy({ where: { id: req.params.id }, limit: 1 })
+    .then(() => {
+      req.method = 'GET';
+      res.redirect('/users');
+    })
 });
 
 router.get("/:id", function(req, res, next) {
