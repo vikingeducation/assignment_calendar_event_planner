@@ -18,7 +18,6 @@ router.get("/new", function(req, res, next) {
 });
 
 router.post("/new", function(req, res, next) {
-  console.log("post starting");
   User.create({
       fname: req.body.firstname,
       lname: req.body.lastname,
@@ -34,7 +33,6 @@ router.post("/new", function(req, res, next) {
 });
 
 router.post("/:id/delete", function(req, res, next) {
-  console.log("into delete post router")
   User.destroy({ where: { id: req.params.id }, limit: 1 })
     .then(() => {
       req.method = 'GET';
@@ -44,7 +42,6 @@ router.post("/:id/delete", function(req, res, next) {
 
 router.get("/:id", function(req, res, next) {
   User.findById(req.params.id).then(user => {
-    console.log(user);
     res.render("showuser", {
       user: user
     });
