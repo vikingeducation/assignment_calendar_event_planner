@@ -41,7 +41,9 @@ app.use(morganToolkit());
 // Routes
 // ----------------------------------------
 var usersRoutes = require('./routers/users');
+let calendarsRoutes = require('./routers/calendars');
 app.use('/', usersRoutes);
+app.use('/calendars', calendarsRoutes);
 
 
 // ----------------------------------------
@@ -51,7 +53,7 @@ var expressHandlebars = require('express-handlebars');
 
 var hbs = expressHandlebars.create({
   partialsDir: 'views/',
-  defaultLayout: 'application'
+  defaultLayout: 'main'
 });
 
 app.engine('handlebars', hbs.engine);
