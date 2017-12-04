@@ -1,20 +1,20 @@
-'use strict';
+"use strict";
 // routers/users.js
 
-let express = require('express');
-let router = express.Router();
-let models = require('./../models');
-let User = models.User;
-let sequelize = models.sequelize;
+const express = require("express");
+const router = express.Router();
+const models = require("./../models");
+const User = models.User;
+const sequelize = models.sequelize;
 
-let onIndex = (req, res) => {
+const onIndex = (req, res) => {
   User.findAll()
     .then(users => {
-      res.render('users', { users });
+      res.render("users", { users });
     })
     .catch(e => res.status(500).send(e.stack));
 };
+router.get("/", onIndex);
+router.get("/users", onIndex);
 
-router.get('/', onIndex);
-
-router.get('/users', onIndex);
+module.exports = router;
