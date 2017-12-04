@@ -4,6 +4,23 @@ var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Put this AFTER your body-parser set up
+
+// Require the two packages
+const methodOverride = require('method-override');
+const getPostSupport = require('express-method-override-get-post-support');
+
+// Pass the callback and options from
+// the support package
+app.use(
+  methodOverride(
+    getPostSupport.callback,
+    getPostSupport.options // { methods: ['POST', 'GET'] }
+  )
+);
+
+app.use(express.static(`${__dirname}/public`));
+
 // Configure body-parser before morgan!!!
 
 // Configure morgan
