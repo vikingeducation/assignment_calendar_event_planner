@@ -5,12 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     lname: DataTypes.STRING,
     username: DataTypes.STRING,
     email: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
   });
   return User;
 };
