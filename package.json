@@ -1,0 +1,29 @@
+{
+  "name": "assignment_calendar_event_planner",
+  "version": "1.0.0",
+  "description": "Calendar event planner",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "morgan": "^1.9.0",
+    "pg": "^7.4.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.26.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeneTinderholm/assignment_calendar_event_planner.git"
+  },
+  "author": "Gene Tinderholm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GeneTinderholm/assignment_calendar_event_planner/issues"
+  },
+  "homepage": "https://github.com/GeneTinderholm/assignment_calendar_event_planner#readme"
+}
