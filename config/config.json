@@ -1,16 +1,16 @@
 {
   "development":
   {
-    "username": "sam",
-    "password": null,
+    "username": "stevenli",
+    "password": "joe",
     "database": "assignment_calendar_event_planner_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test":
   {
-    "username": "sam",
-    "password": null,
+    "username": "stevenli",
+    "password": "joe",
     "database": "assignment_calendar_event_planner_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
