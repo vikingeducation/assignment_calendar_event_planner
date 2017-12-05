@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   var Calendar = sequelize.define('Calendar', {
     calendarName: DataTypes.STRING,
-    userId: DataTypes.NUMBER
+    userId: DataTypes.INTEGER
   });
   return Calendar;
 };

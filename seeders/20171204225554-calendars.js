@@ -13,10 +13,10 @@ module.exports = {
       }], {});
     */
     var calendars = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 1; i < 11; i++) {
       calendars.push({
-        calendarName: `My Calendar${i}`,
-        userId: `User ID: ${i}`
+        calendarName: `My Calendar ${i}`,
+        userId: i
       });
     }
     return queryInterface.bulkInsert('Calendars', calendars);

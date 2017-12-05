@@ -10,9 +10,9 @@
       <tr>
         <th>Calendar Name</th>
         <th>Username</th>
-        <!-- <th>Email</th>
-        <th></th>
-        <th></th> -->
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -24,15 +24,15 @@
         <td>
           <a href="/calendars/{{ calendar.id }}">{{ calendar.userId }}</a>
         </td>
-        <!-- <td>
-          <a href="/users/{{ user.id }}">{{ user.email }}</a>
+        <td>
+          <a href="/users/{{ calendar.id }}">{{ calendar.userId }}</a>
         </td>
         <td>
-          <a href="/users/{{ user.id }}/edit">Edit</a>
+          <a href="/users/{{ calendar.id }}/edit">Edit</a>
         </td>
         <td>
-          <a href="/users/{{ user.id }}?_method=delete" class="text-danger">Delete</a>
-        </td> --> -->
+          <a href="/users/{{ calendar.id }}?_method=delete" class="text-danger">Delete</a>
+        </td>
       </tr>
       {{/each }}
     </tbody>
