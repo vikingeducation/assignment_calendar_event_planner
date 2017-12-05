@@ -1,0 +1,37 @@
+{
+  "name": "assignment_calendar_event_planner",
+  "version": "1.0.0",
+  "description": "I'll pencil you in on Tuesday around noonish?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliashantula/assignment_calendar_event_planner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eliashantula/assignment_calendar_event_planner/issues"
+  },
+  "homepage": "https://github.com/eliashantula/assignment_calendar_event_planner#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "express-generator": "^4.15.5",
+    "express-handlebars": "^3.0.0",
+    "express-method-override-get-post-support": "^1.0.0",
+    "handlebars": "^4.0.11",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.0",
+    "morgan-toolkit": "^1.0.2",
+    "mysql2": "^1.5.1",
+    "pg": "^7.4.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.26.0"
+  },
+  "devDependencies": {}
+}
