@@ -1,0 +1,28 @@
+<h2>Calendars Index</h2>
+
+<div class="container">
+  <div class="row">
+    <a href="/calendars/new"><button class="btn btn-primary btn-lg">+ New calendars</button></a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">Calendar Name</div>
+    <div class="col-sm-2">Username</div>
+    <div class="col-sm-2">Email</div>
+    <div class="col-sm-2">Edit</div>
+    <div class="col-sm-2">Delete</div>
+  </div>
+  {{#each calendars as |calendar|}}
+  <div class="row">
+    <a href="/calendars/{{calendar.id}}">
+      <div class="col-sm-2">{{calendar.name}}</div>
+    </a>
+    <div class="col-sm-2">Username</div>
+    <div class="col-sm-2">Email</div>
+    <div class="col-sm-2">Edit</div>
+    <div class="col-sm-2">Delete</div>
+  </div>
+  {{/each}}
+</div>
