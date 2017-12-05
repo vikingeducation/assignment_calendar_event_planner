@@ -1,9 +1,8 @@
-// routers/users.js
-
 var express = require('express');
 var router = express.Router();
 var models = require('./../models');
 var User = models.User;
+var Calendar = models.Calendar;
 var sequelize = models.sequelize;
 
 var onIndex = (req, res) => {
@@ -20,6 +19,34 @@ router.get('/users/new', (req, res) => {
   res.render('users/new');
 });
 
+//CALENDAR
+
+var onIndexCalendar = (req, res) => {
+  Calendar.findAll()
+    .then(calendars => {
+      res.render('calendars/index', { calendars });
+    })
+    .catch(e => res.status(500).send(e.stack));
+};
+router.get('/calendars', onIndexCalendar);
+
+router.get('/calendars/new', (req, res) => {
+  res.render('calendars/new');
+});
+
+router.get('/calendars/:id', (req, res) => {
+  Calendar.findById(req.params.id)
+    .then(calendars => {
+      if (calendars) {
+        res.render('calendars/show', { calendars });
+      } else {
+        res.send(404);
+      }
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+/////////////////////////////
 router.get('/users/:id/edit', (req, res) => {
   User.findById(req.params.id)
     .then(user => {

@@ -48,8 +48,8 @@ var hbs = expressHandlebars.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-var usersRoutes = require('./routers/users');
-app.use('/', usersRoutes);
+var routes = require('./routers/routes');
+app.use('/', routes);
 
 // ----------------------------------------
 // Server
