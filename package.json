@@ -1,0 +1,30 @@
+{
+  "name": "assignment_calendar_event_planner",
+  "version": "1.0.0",
+  "description": "I'll pencil you in on Tuesday around noonish?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wdh7/assignment_calendar_event_planner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wdh7/assignment_calendar_event_planner/issues"
+  },
+  "homepage": "https://github.com/wdh7/assignment_calendar_event_planner#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "express-method-override-get-post-support": "^1.0.0",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.0",
+    "pg": "^7.4.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.27.0"
+  }
+}

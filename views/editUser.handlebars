@@ -1,0 +1,21 @@
+<section class='wrapper'>
+  <h1 class='page-header'>Edit User: {{user.firstName}} {{user.lastName}}</h1>
+
+<form action='/users/{{user.id}}' method='POST'>
+  <input type='hidden' name='_method' value='PUT'/>
+
+  <span>First Name: </span>
+  <input type='text' name='firstName' value='{{user.firstName}}'/><br/>
+
+  <span>Last Name: </span>
+  <input type='text' name='lastName' value='{{user.lastName}}'/><br/>
+
+  <span>Username: </span>
+  <input type='text' name='username' value='{{user.username}}'/><br/>
+
+  <span>Email: </span>
+  <input type='email' name='email' value='{{user.email}}'/><br/>
+
+  <button type='submit'>Edit</button>
+</form>
+</section>
