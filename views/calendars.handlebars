@@ -1,0 +1,25 @@
+<section class='wrapper'>
+  <h1 class='page-header'>Calendars:</h1>
+
+  <button><a href='/calendars/new'>Add New Calendar</a></button>
+
+  <table>
+    <tr>
+      <th>Calendar Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+
+    {{#each calendarsWithUsers as |calendar|}}
+    <tr>
+      <td><a href='/calendars/{{calendar.calendarId}}'>{{calendar.name}}</a></td>
+      <td><a href='/users/{{calendar.userId}}'>{{calendar.username}}</a></td>
+      <td><a href='/users/{{calendar.userId}}'>{{calendar.email}}</a></td>
+      <td><a href='/calendars/{{calendarId}}/edit'>Edit</a></td>
+      <td><a href='/calendars/{{calendar.calendarId}}?_method=DELETE'>Delete</a></td>
+    </tr>
+    {{/each}}
+  </table>
+</section>

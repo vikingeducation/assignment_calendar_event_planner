@@ -5,6 +5,8 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const getPostSupport = require('express-method-override-get-post-support');
 const users = require('./routes/users');
+const calendars = require('./routes/calendars');
+
 
 const app = express();
 
@@ -33,6 +35,7 @@ app.set('view engine', 'handlebars');
 
 
 app.use('/', users);
+app.use('/calendars', calendars);
 
 
 
