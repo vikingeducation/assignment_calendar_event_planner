@@ -1,0 +1,24 @@
+<section class='wrapper'>
+  <h1 class='page-header'>Edit Event:</h1>
+
+<form action='/events/{{event.id}}' method='POST'>
+  <input type='hidden' name='_method' value='PUT'/>
+
+  <span>Event Name: </span>
+  <input type='text' name='name' value='{{event.name}}'/><br/>
+
+  <span>Description: </span>
+  <input type='text' name='description' value='{{event.description}}'/><br/>
+
+  <span>Date: </span>
+  <input type='text' name='date' value='{{event.date}}'/><br/>
+
+  <span>Start Time: </span>
+  <input type='text' name='startTime' value='{{event.startTime}}'/><br/>
+
+  <span>End Time: </span>
+  <input type='text' name='endTime' value='{{event.endTime}}'/><br/>
+
+  <button type='submit'>Edit</button>
+</form>
+</section>

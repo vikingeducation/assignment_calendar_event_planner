@@ -1,0 +1,27 @@
+<section class='wrapper'>
+  <h1 class='page-header'>Event: {{event.name}}</h1>
+
+  <button><a href='/events/{{event.id}}/edit'>Edit</a></button>
+  <button><a href='/events/{{event.id}}?_method=DELETE'>Delete</a></button>
+
+  <table>
+    <tr>
+      <th>Event Name</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Calendar Name</th>
+      <th>Username</th>
+      <th>Email</th>
+    </tr>
+    <tr>
+      <td>{{event.name}}</td>
+      <td>{{event.date}}</td>
+      <td>{{event.startTime}}</td>
+      <td>{{event.endTime}}</td>
+      <td>{{calendar.name}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>
+    </tr>
+  </table>
+</section>

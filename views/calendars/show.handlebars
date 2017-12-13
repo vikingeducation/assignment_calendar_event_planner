@@ -1,0 +1,17 @@
+<section class='wrapper'>
+  <h1 class='page-header'>Calendar: {{calendar.name}}</h1>
+
+  <button><a href='/calendars/{{calendar.id}}/edit'>Edit</a></button>
+  <button><a href='/calendars/{{calendar.id}}?_method=DELETE'>Delete</a></button>
+
+  <table>
+    <tr>
+      <th>Calendar Name</th>
+      <th>Username</th>
+    </tr>
+    <tr>
+      <td>{{calendar.name}}</td>
+      <td>{{user.username}}</td>
+    </tr>
+  </table>
+</section>

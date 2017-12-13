@@ -1,0 +1,33 @@
+<section class='wrapper'>
+  <h1 class='page-header'>Events:</h1>
+
+  <button><a href='/events/new'>Add New Event</a></button>
+
+  <table>
+    <tr>
+      <th>Event Name</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Calendar Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+
+    {{#each combinedEvents as |event|}}
+    <tr>
+      <td><a href='/events/{{event.id}}'>{{event.name}}</a></td>
+      <td><a href='/events/{{event.id}}'>{{event.date}}</a></td>
+      <td><a href='/events/{{event.id}}'>{{event.startTime}}</a></td>
+      <td><a href='/events/{{event.id}}'>{{event.endTime}}</a></td>
+      <td><a href='/calendars/{{event.calendarId}}'>{{event.calendarName}}</a></td>
+      <td><a href='/users/{{event.userId}}'>{{event.username}}</a></td>
+      <td><a href='/users/{{event.userId}}'>{{event.email}}</a></td>
+      <td><a href='/events/{{event.id}}/edit'>Edit</a></td>
+      <td><a href='/events/{{event.id}}?_method=DELETE'>Delete</a></td>
+    </tr>
+    {{/each}}
+  </table>
+</section>
