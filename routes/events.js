@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
       const users = values[2];
 
       const combinedEvents = combineTables(events, calendars, users);
-      res.render('events', {combinedEvents});
+      res.render('events/index', {combinedEvents});
     })
     .catch(err => {
       res.status(500).send(err.stack);
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/new', (req, res) => {
-  res.render('createEvent');
+  res.render('events/create');
 });
 
 router.get('/:id', (req, res) => {
@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
           const calendarUserId = calendar.userId;
 
           User.findById(calendarUserId).then(user => {
-            res.render('event', {event, calendar, user});
+            res.render('events/show', {event, calendar, user});
           })
         })
     })
@@ -70,7 +70,7 @@ router.get('/:id/edit', (req, res) => {
 
   Event.findById(eventId)
     .then(event => {
-      res.render('editEvent', {event});
+      res.render('events/edit', {event});
     })
     .catch(err => {
       res.status(500).send(err.stack);

@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
         });
       })
 
-      res.render('invitations', {newInvitations});
+      res.render('invitations/index', {newInvitations});
     })
     .catch(err => {
       res.status(500).send(err.stack);
@@ -45,7 +45,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/new', (req, res) => {
-  res.render('createInvitation');
+  res.render('invitations/create');
 });
 
 router.post('/', (req, res) => {

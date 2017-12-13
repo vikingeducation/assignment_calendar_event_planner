@@ -6,7 +6,7 @@ const User = models.User;
 router.get('/', (req, res) => {
   User.findAll()
     .then(users => {
-      res.render('users', {users});
+      res.render('users/index', {users});
     })
     .catch(err => {
       res.status(500).send(err.stack);
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 
 
 router.get('/users/new', (req, res) => {
-  res.render('createUser');
+  res.render('users/create');
 });
 
 
@@ -26,7 +26,7 @@ router.get('/users/:id', (req, res) => {
     where: {id: userId}
   })
     .then(user => {
-      res.render('user', {user});
+      res.render('users/show', {user});
     })
     .catch(err => {
       res.status(500).send(err.stack);
@@ -69,7 +69,7 @@ router.get('/users/:id/edit', (req, res) => {
 
   User.findById(userId)
     .then(user => {
-      res.render('editUser', {user});
+      res.render('users/edit', {user});
     })
     .catch(err => {
       res.status(500).send(err.stack);
