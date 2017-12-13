@@ -1,0 +1,23 @@
+<section class='wrapper'>
+  <h1 class='page-header'>Invitations:</h1>
+
+  <button><a href='/invitations/new'>Add New Invitation</a></button>
+
+  <table>
+    <tr>
+      <th>Event Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Delete</th>
+    </tr>
+
+    {{#each newInvitations as |invite|}}
+    <tr>
+      <td><a href='/events/{{invite.eventId}}'>{{invite.eventName}}</a></td>
+      <td><a href='/users/{{invite.userId}}'>{{invite.userName}}</a></td>
+      <td><a href='/users/{{invite.userId}}'>{{invite.userEmail}}</a></td>
+      <td><a href='/invitations/{{invite.id}}?_method=DELETE'>Delete</a></td>
+    </tr>
+    {{/each}}
+  </table>
+</section>

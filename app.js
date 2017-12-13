@@ -7,6 +7,7 @@ const getPostSupport = require('express-method-override-get-post-support');
 const users = require('./routes/users');
 const calendars = require('./routes/calendars');
 const events = require('./routes/events');
+const invitations = require('./routes/invitations');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.set('view engine', 'handlebars');
 app.use('/', users);
 app.use('/calendars', calendars);
 app.use('/events', events);
+app.use('/invitations', invitations);
 
 
 
