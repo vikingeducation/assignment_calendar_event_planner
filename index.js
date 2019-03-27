@@ -40,12 +40,10 @@ app.use((req, res, next) => {
 });
 
 
-// var usersRoutes = require('./routers/users');
-// app.use('/', usersRoutes);
+var usersRoutes = require('./routers/users');
+app.use('/', usersRoutes);
 
-app.get('/', (req, res) => {
-  res.send("hello")
-})
+
 
 
 var port = process.env.PORT ||
