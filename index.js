@@ -43,7 +43,8 @@ app.use((req, res, next) => {
 var usersRoutes = require('./routers/users');
 app.use('/', usersRoutes);
 
-
+var calendarRouter = require('./routers/calendars');
+app.use('/calendars', calendarRouter);
 
 
 var port = process.env.PORT ||
