@@ -22,18 +22,18 @@
       <td>{{calendar.username}}</td>
       <td>{{calendar.email}}</td>
       <td>
-        <a href="/users/{{user.id}}">view</a>
+        <a href="/calendars/{{calendar.id}}">view</a>
       </td>
       <td>
         <button type="button" name="button">
-          <a href="/users/{{user.id}}/edit">
+          <a href="/calendars/{{calendar.id}}/edit">
             Edit
           </a>
         </button>
       </td>
       <td>
         <button type="button" name="button" class="btn btn-danger">
-          <a href="/users/{{user.id}}?_method=delete">
+          <a href="/calendars/{{calendar.id}}?_method=delete">
             Delete
           </a>
         </button>

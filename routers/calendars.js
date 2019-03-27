@@ -31,6 +31,22 @@ router.get('/', (req, res) => {
     .catch( e => res.status(500).send(e.stack));
 });
 
+router.get('/:id', (req, res) => {
+  let calendarId = req.params.id;
+
+  Calendar.findByPk(calendarId)
+    .then(calendar => {
+      if (calendar) {
+        User.findByPk( calendar.userId ).then( user => {
+          calendar.username = user.username;
+          res.render('calendars/show', {calendar});
+        })
+      } else {
+        res.send(400);
+      }
+    })
+});
+
 
 
 module.exports = router;
