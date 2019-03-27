@@ -1,0 +1,27 @@
+<h2>Edit User: {{user.username}}</h2>
+
+<form action="/users/{{user.id}}" method="post">
+  <input type="hidden" name="_method" value="PUT">
+  <div class="form-group">
+    <label for="firstName">First Name:</label>
+    <input type="text" class="form-control" id="firstName" name="firstname" value="{{user.fname}}">
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Last Name:</label>
+    <input type="text" class="form-control" id="lastName" name="lastname" value="{{user.lname}}">
+  </div>
+
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input type="text" class="form-control" id="username" name="username"  value="{{user.username}}">
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email address:</label>
+    <input type="email" class="form-control" id="email" name="email"  value="{{user.email}}">
+    <!-- <input type="email" class="form-control" id="email" name="user[email]"> -->
+  </div>
+
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>

@@ -1,7 +1,9 @@
 <h2>Users Index</h2>
 
-
-
+<button type="button" name="button">
+<a href="/users/new">Create new user</a>
+</button>
+<br>
 
 <table class="table">
   <thead>
@@ -21,10 +23,21 @@
         <td>{{user.username}}</td>
         <td>{{user.email}}</td>
         <td>
-          <button type="button" name="button">Edit</button>
+          <a href="/users/{{user.id}}">view</a>
         </td>
         <td>
-          <button type="button" name="button">Delete</button>
+          <button type="button" name="button">
+            <a href="/users/{{user.id}}/edit">
+              Edit
+            </a>
+          </button>
+        </td>
+        <td>
+          <button type="button" name="button" class="btn btn-danger">
+            <a href="/users/{{user.id}}?_method=delete">
+              Delete
+            </a>
+          </button>
         </td>
       </tr>
     {{/each}}
