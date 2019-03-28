@@ -1,0 +1,46 @@
+<h2>Users Index</h2>
+
+<button type="button" name="button">
+<a href="/users/new">Create new user</a>
+</button>
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {{#each users as |user|}}
+      <tr>
+        <td>{{user.fname}}</td>
+        <td>{{user.lname}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>
+          <a href="/users/{{user.id}}">view</a>
+        </td>
+        <td>
+          <button type="button" name="button">
+            <a href="/users/{{user.id}}/edit">
+              Edit
+            </a>
+          </button>
+        </td>
+        <td>
+          <button type="button" name="button" class="btn btn-danger">
+            <a href="/users/{{user.id}}?_method=delete">
+              Delete
+            </a>
+          </button>
+        </td>
+      </tr>
+    {{/each}}
+
+  </tbody>
+</table>

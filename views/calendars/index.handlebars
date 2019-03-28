@@ -1,0 +1,44 @@
+<h2>Calendars Index</h2>
+
+<button type="button" name="button">
+<a href="/calendars/new">Create new calendar</a>
+</button>
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Calendar Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+    {{#each calendars as |calendar|}}
+    <tr>
+      <td>{{calendar.name}}</td>
+      <td>{{calendar.username}}</td>
+      <td>{{calendar.email}}</td>
+      <td>
+        <a href="/calendars/{{calendar.id}}">view</a>
+      </td>
+      <td>
+        <button type="button" name="button">
+          <a href="/calendars/{{calendar.id}}/edit">
+            Edit
+          </a>
+        </button>
+      </td>
+      <td>
+        <button type="button" name="button" class="btn btn-danger">
+          <a href="/calendars/{{calendar.id}}?_method=delete">
+            Delete
+          </a>
+        </button>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
