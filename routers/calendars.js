@@ -6,6 +6,7 @@ const Calendar = models.Calendar;
 const User = models.User;
 const sequelize = models.sequelize;
 
+//index
 router.get('/', (req, res) => {
 
   var calendars = Calendar.findAll();
@@ -31,6 +32,27 @@ router.get('/', (req, res) => {
     .catch( e => res.status(500).send(e.stack));
 });
 
+// new
+router.get('/new', (req, res) => {
+  User.findAll({
+    attributes: [
+      ['id', 'userId']
+    ]
+  })
+    .then(userIds => {
+      userIds = userIds.map(idObj => {
+        return idObj.dataValues.userId
+      });
+      console.log(userIds, '****')
+      res.render('calendars/new', { userIds });
+    })
+    .catch((e) => res.status(500).send(e.stack));
+});
+
+
+
+
+//show
 router.get('/:id', (req, res) => {
   let calendarId = req.params.id;
 
@@ -46,6 +68,38 @@ router.get('/:id', (req, res) => {
       }
     })
 });
+
+
+// Create
+router.post('/', (req, res) => {
+  req.body.name
+  req.body.userId
+
+  let calendarParams = {
+    name: req.body.name,
+    userId: req.body.userId
+  };
+
+  Calendar.create(calendarParams)
+    .then( calendar => {
+      res.redirect(`/calendars/${calendar.id}`)
+    })
+    .catch(e => res.status(500).send(e));
+
+});
+
+//destory
+router.delete('/:id', (req, res) => {
+  Calendar.destroy({
+    where: { id : req.params.id },
+    limit: 1
+  })
+    .then(() => {
+      req.method = 'GET';
+      res.redirect('/calendars');
+    })
+    .catch((e) => res.status(500).send(e.stack));
+})
 
 
 
