@@ -88,7 +88,39 @@ router.post('/', (req, res) => {
 
 });
 
-//destory
+//edit
+router.get('/:id/edit', (req, res) => {
+  Calendar.findByPk(req.params.id)
+    .then( calendar => {
+      if (calendar) {
+        res.render('calendars/edit', { calendar });
+      } else {
+        res.send(404);
+      }
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+// update
+router.put('/:id', (req, res) => {
+  let calendarParams = {
+    name: req.body.name
+  };
+
+  Calendar.update(calendarParams, {
+    where: { id: req.params.id },
+    limit: 1
+  })
+    .then( calendar => {
+      req.method = 'GET';
+      res.redirect(`/calendars/${req.params.id}`);
+    })
+    .catch(e => res.status(500).send(e.stack));
+
+});
+
+
+//destroy
 router.delete('/:id', (req, res) => {
   Calendar.destroy({
     where: { id : req.params.id },
