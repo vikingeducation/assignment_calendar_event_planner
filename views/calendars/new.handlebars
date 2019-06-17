@@ -1,0 +1,19 @@
+<header class="page-header">
+  <h1>New calendar</h1>
+</header>
+
+
+<form action="/calendars" method="post">
+  <h2>calendar Info</h2>
+  <div class="form-group">
+    <label for="calendar_name">Calendar Name</label>
+    <input type="text" class="form-control" name="calendar[name]" id="calendar_name">
+  </div>
+  <div class="form-group">
+    <label for="calendar_username">Username</label>
+    <input type="text" class="form-control" name="calendar[username]" id="calendar_username">
+  </div>
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary">
+  </div>
+</form>

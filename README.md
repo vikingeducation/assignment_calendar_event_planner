@@ -1,2 +1,5 @@
-# assignment_calendar_event_planner
-I'll pencil you in on Tuesday around noonish?
+# sequelize_calendar_app
+
+A practice app using sequelize and express to organize data
+
+Gregory Alford

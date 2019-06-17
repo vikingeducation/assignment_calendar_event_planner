@@ -1,0 +1,30 @@
+<header class="page-header">
+  <h1>New Invitation</h1>
+</header>
+
+
+<form action="/invitation" method="post">
+  <h2>Invitation Info</h2>
+
+  <div class="form-group">
+    <label for="event_id">Event Name</label>
+    <select class="form-control" name="event[id]" id="event_id">
+      {{#each events as |event| }}
+      <option value="{{ event.id }}">{{ event.name }}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="user_id">Username</label>
+    <select class="form-control" name="event[user]" id="user_id">
+      {{#each events as |event| }}
+      <option value="{{ event.Calendar.User.id }}">{{ event.Calendar.User.username }}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary">
+  </div>
+</form>
